@@ -10,7 +10,9 @@ print(type(age))
 
 title = 'mr'
 
-# print(title + ' james is ' + age)
+print(title + f' james is {age} years old')
 
 age = "2 years"
 print(type(age))
+
+print(f"Pi id approximately {22/7:.50f}")
