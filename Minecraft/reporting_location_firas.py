@@ -1,6 +1,8 @@
 from mcpi.minecraft import Minecraft
 mc = Minecraft.create()
 
+mc.postToChat("Hello world, this is firas")
+
 position = mc.player.getTilePos()
 x = position.x
 y = position.y

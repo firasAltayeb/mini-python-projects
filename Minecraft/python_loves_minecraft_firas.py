@@ -1,5 +1,0 @@
-print(2+2)
-print("w" + "o" * 20)
-print("Python")
-print("loves")
-print("Minecraft")
