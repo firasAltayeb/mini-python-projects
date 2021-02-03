@@ -6,7 +6,9 @@ x = position.x
 y = position.y
 z = position.z
 
-which_block = mc.getBlock(x, y-1, z)
+# we can make a lantern in case it's dark 169
+block_id = 103
 
-mc.postToChat("The block below has an id of {}".format(which_block))
-
+for i in range(10):
+    mc.setBlock(x, y, z, block_id)
+    x += 1

@@ -3,9 +3,12 @@ from time import sleep
 
 mc = Minecraft.create()
 
-flower = 38
+flower_block = 38
 
 while True:
-    x, y, z = mc.player.getPos()
-    mc.setBlock(x, y, z, flower)
+    position = mc.player.getTilePos()
+    x = position.x
+    y = position.y
+    z = position.z
+    mc.setBlock(x, y, z, flower_block)
     sleep(0.1)
