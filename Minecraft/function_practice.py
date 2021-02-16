@@ -7,8 +7,8 @@ lava = 10
 water = 8
 air = 0
 
-playerIds = mc.getPlayerEntityIds()
-x, y, z = mc.entity.getPos(playerIds[0])
+playerId = mc.getPlayerEntityId("TCCMinecraft001")
+x, y, z = mc.entity.getPos(playerId)
 
 def lava_fountain():
     mc.setBlock(x+3, y+3, z, lava)
