@@ -9,16 +9,16 @@ menu = [
     ["cheese", "dog", "dog", "dog", "bread", "pickles"],
 ]
 
-for meal in menu:
-    for item in meal:
-        if item != "dog":
-            print(item, end=" ")          
-    print()
-
-
 # for meal in menu:
-#     for index in range(len(meal) - 1, -1, -1):
-#         if meal[index] == "dog":
-#             del meal[index] 
+#     for item in meal:
+#         if item != "dog":
+#             print(item, end=" ")          
+#     print()
+
+
+for meal in menu:
+    for index in range(len(meal) - 1, -1, -1):
+        if meal[index] == "dog":
+            del meal[index] 
             
-#     print(meal)
+    print(", ".join(meal))
