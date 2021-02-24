@@ -12,7 +12,7 @@ menu = [
 for meal in menu:
     for item in meal:
         if item != "dog":
-            print(item)          
+            print(item, end=" ")          
     print()
 
 
