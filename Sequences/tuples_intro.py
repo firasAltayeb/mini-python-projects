@@ -24,4 +24,3 @@ print(table[1] * table[2])
 name, length, width, height, price = table
 print(length * width)
 
-
