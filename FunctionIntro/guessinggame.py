@@ -1,18 +1,20 @@
 import random
 
+guess = 0
+highest = 1000
+answer = random.randint(1, highest)
+print(answer)   # TODO: Remove after testing
+print("Please guess number between 1 and {}: ".format(highest))
+
 
 def get_integer(prompt):
     while True:
         temp = input(prompt)
         if temp.isnumeric():
             return int(temp)
+        # else:
+        print("{} is not a number".format(temp))
 
-
-highest = 1000
-answer = random.randint(1, highest)
-print(answer)   # TODO: Remove after testing
-guess = 0 # initialise to any number that doesn't equal the answer
-print("Please guess number between 1 and {}: ".format(highest))
 
 while guess != answer:
     guess = get_integer(": ")
