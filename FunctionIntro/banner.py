@@ -1,4 +1,4 @@
-def banner_text(text, width=80):
+def banner_text(text=" ", width=80):
     screen_width = width
     if len(text) > screen_width - 4:
         raise ValueError("String {0} is larger then specified "
@@ -14,7 +14,7 @@ def banner_text(text, width=80):
 
 banner_text("*", 50)
 banner_text("Always look on the bright side")
-banner_text(" ", 50)
+banner_text(width=60)
 banner_text("When you're feeling in the dumps")
 banner_text("*", 10)
 

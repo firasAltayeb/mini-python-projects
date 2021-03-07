@@ -2,6 +2,7 @@ import pygame
 import sys
 import random
 
+
 class Snake():
     def __init__(self):
         self.length = 1
