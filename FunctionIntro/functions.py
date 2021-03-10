@@ -23,11 +23,12 @@ if palindrome_sentence(word.casefold()):
 else:
     print("'{}' is not a palindrome".format(word))
 
-# answer = multiply(10.5, 4)
-# print(answer)
-#
-# print()
-#
-# for val in range(1, 5):
-#     two_times = multiply(2, val)
-#     print(two_times)
+answer = multiply(10.5, 4)
+print(answer)
+
+print()
+
+for val in range(1, 5):
+    two_times = multiply(2, val)
+    print(two_times)
+
