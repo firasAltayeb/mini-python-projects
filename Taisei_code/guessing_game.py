@@ -1,10 +1,12 @@
 import random
 
 guess = 0
-highest = 1000
-answer = random.randint(1, highest)
+lowest = 0
+highest = 100
+answer = random.randint(lowest, highest)
 
-print("Please guess a number between 1 and {}".format(highest))
+print("Please guess a number between {0} and {1}".format(lowest, highest))
+
 
 def get_integer(message):
     while True:
@@ -13,6 +15,7 @@ def get_integer(message):
             return int(temp)
         else:
             print("{} is not a number".format(temp))
+
 
 while guess != answer:
     guess = get_integer("guess: ")

@@ -1,15 +1,13 @@
 class Intro:
-
-    """
     number = 4
     available_exits = ["north", "south"]
 
-    def printMessage(message, x):
+    def printMessage(self, message, x):
         print(message * x)
-        print(message * number)
-    """
+        print(message * self.number)
+    
 
-    # / is for division 
+    # / is for division
     def multiply(self, x, y):
         result = x * y
         return result
@@ -19,18 +17,14 @@ class Intro:
         result = x / y
         return result
             
-    """
-    def escape_exit():
+    
+    def escape_exit(self):
         exit = ""
-        while exit not in available_exits:
+        while exit not in self.available_exits:
             exit = input("please choose an exit: ").casefold()    
             if exit.casefold() == "quit":
                 print("Game Over")
                 break
-
-    escape_exit()
+        print("You have escaped")
     
 
-    multiply(12, 4)
-    printMessage("hello world ", 2)
-    """
