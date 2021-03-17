@@ -34,7 +34,8 @@ for i in range(int(width/2) + 1):
     mc.setBlocks(x+i, y+height+i, z+3, x+i, y+height+i, z+3+depth, block.STAIRS_WOOD.id, 0)
     mc.setBlocks(x+width-i, y+height+i, z+3, x+width-i, y+height+i, z+3+depth, block.STAIRS_WOOD.id, 1)
     # Gable ends.
-    if (int(width/2) - i > 0):
+    if int(width / 2) - i > 0:
         mc.setBlocks(x+1+i, y+height+i, z+3, x+width-i-1, y+height+i, z+3, block.BRICK_BLOCK.id, 0)
         mc.setBlocks(x+1+i, y+height+i, z+3+depth, x+width-i-1, y+height+i, z+3+depth, block.BRICK_BLOCK.id, 1)
-        
+
+

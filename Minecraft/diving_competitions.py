@@ -1,10 +1,11 @@
 from mcpi.minecraft import Minecraft
 import time
 
-mc = Minecraft.create()
+mc = Minecraft.create("mc.tokyocodingclub.com")
 
 score = 0
-pos = mc.player.getPos()
+playerId = mc.getPlayerEntityId("TCCMinecraft001")
+pos = mc.entity.getPos(playerId)
 blockAbove = mc.getBlock(pos.x, pos.y + 2, pos.z)
 
 while blockAbove == 8 or blockAbove == 9:

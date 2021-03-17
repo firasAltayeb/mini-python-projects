@@ -1,9 +1,11 @@
 from mcpi.minecraft import Minecraft
 from time import sleep
 
-mc = Minecraft.create()
+mc = Minecraft.create("mc.tokyocodingclub.com")
 
-x, y, z = mc.player.getPos()
+playerId = mc.getPlayerEntityId("TCCMinecraft001")
+x, y, z = mc.entity.getPos(playerId)
+
 
 lava = 10
 water = 8

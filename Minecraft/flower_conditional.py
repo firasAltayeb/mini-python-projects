@@ -4,10 +4,11 @@ from time import sleep
 grass_block = 2
 flower_block = 38
 
-mc = Minecraft.create()
+mc = Minecraft.create("mc.tokyocodingclub.com")
+playerId = mc.getPlayerEntityId("TCCMinecraft001")
 
 while True:
-    position = mc.player.getTilePos()
+    position = mc.entity.getPos(playerId)
     x = position.x
     y = position.y
     z = position.z
