@@ -19,15 +19,13 @@ print(stop)
 del data[:stop]
 print(data)
 
-#process the high valyes in the list
+# process the high valyes in the list
 start = 0
 for index in range(len(data) - 1, -1, -1):
     if data[index] <= max_valid:
         start = index + 1
         break
 
-print(start) 
+print(start)
 del data[start:]
 print(data)
-
-
