@@ -1,7 +1,7 @@
 from mcpi.minecraft import Minecraft
 from time import sleep
 
-mc = Minecraft.create("mc2.tokyocodingclub.com")
+mc = Minecraft.create("mc.tokyocodingclub.com")
 
 water = 8
 distance = 1
