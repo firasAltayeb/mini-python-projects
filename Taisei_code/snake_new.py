@@ -2,7 +2,7 @@ import pygame
 import random
 
 screen_width = 380
-screen_height = 300
+screen_height = 380
 
 grid_size = 20
 grid_width = screen_width / grid_size
@@ -12,7 +12,7 @@ grid_height = screen_height / grid_size
 def draw_grid(surface):
     for x in range(0, int(grid_width)):
         # Rect((left, top), (width, height))
-        rectangle = pygame.Rect((0, x * grid_size),
+        rectangle = pygame.Rect((x * grid_size, x * grid_size),
                                 (grid_size, grid_size))
         pygame.draw.rect(surface, (102, 255, 178), rectangle)
 
@@ -29,7 +29,7 @@ def main():
     draw_grid(surface)
 
     time_out = 0
-    while time_out < 10:
+    while time_out < 3:
         clock.tick(1)
         screen.blit(surface, (0, 0))
         pygame.display.update()

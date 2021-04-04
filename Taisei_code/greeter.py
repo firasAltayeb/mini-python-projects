@@ -28,3 +28,12 @@ class GreeterMark:
     def greet(self):
         print("Hello {}-san"
             .format(self.visitors_list[0]))
+
+class GreeterHaruna:
+    v_list = []
+    
+    def enters(self, visitor):
+        self.v_list.append(visitor)
+
+    def greet(self):
+        print("Hi " + (self.v_list[0]))
