@@ -13,4 +13,4 @@ def destroy(size):
         mc.setBlocks(x-size, y, z-size, x+size, y+size, z+size, 0)
 
 
-destroy(5)
+destroy(10)
