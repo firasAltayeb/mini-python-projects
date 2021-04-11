@@ -6,7 +6,7 @@ playerId = mc.getPlayerEntityId("TCCMinecraft001")
 unwantedBlock = 8
 
 
-def undo():
+def undo_walk():
     while True:
         x, y, z = mc.entity.getPos(playerId)
         block_to_right = mc.getBlock(x + 1, y, z)
@@ -32,4 +32,4 @@ def undo():
         sleep(0.1)
 
 
-undo()
+undo_walk()
