@@ -9,11 +9,5 @@ x,y,z,= mc.entity.getTilePos(playerId)
 all_blocks = list(range(1, 255))
 random.shuffle(all_blocks)
 for i in range(len(all_blocks)):
-    mc.setBlock(x,y+i,z+1,all_blocks[i])
-    
+    mc.setBlock(x, y+i, z+1, all_blocks[i])
 
-
-
-
-
-    
