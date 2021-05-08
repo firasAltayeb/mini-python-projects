@@ -1,6 +1,7 @@
 from mcpi.minecraft import Minecraft
 mc = Minecraft.create("mc.tokyocodingclub.com")
 
+playerIds = mc.getPlayerEntityIds()
 playerId = mc.getPlayerEntityId("TCCMinecraft008")
 pidX, pidY, pidY = mc.entity.getPos(playerId)
 
@@ -10,5 +11,6 @@ z = 50
 
 mc.entity.setTilePos(playerId, x, y, z)
 
-mc.player.setTilePos(pidX, pidY, pidY)
+if playerId == playerIds[1]:
+    mc.player.setTilePos(pidX, pidY, pidY)
 
