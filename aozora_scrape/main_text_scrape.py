@@ -1,7 +1,7 @@
 import requests
 from time import sleep
 from bs4 import BeautifulSoup
-from aozora_text_sites import novel_text_sites
+from novel_text_sites import novel_text_sites
 
 for novel_text_site in novel_text_sites:
     response = requests.get(novel_text_site)
