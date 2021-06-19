@@ -1,7 +1,5 @@
 from mcpi import block
 from mcpi.minecraft import Minecraft
-
-# Connect to Minecraft
 mc = Minecraft.create("mc.tokyocodingclub.com")
 
 # Determine the Player's current position.

@@ -1,6 +1,5 @@
 from mcpi.minecraft import Minecraft
-
-mc = Minecraft.create()
+mc = Minecraft.create("mc.tokyocodingclub.com")
 
 points = int(input("Enter your points: "))
 

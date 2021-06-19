@@ -1,5 +1,4 @@
 from mcpi.minecraft import Minecraft
-
 mc = Minecraft.create()
 
 valid = True

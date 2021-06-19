@@ -1,7 +1,7 @@
-from mcpi.minecraft import Minecraft
 from time import sleep
-
+from mcpi.minecraft import Minecraft
 mc = Minecraft.create("mc.tokyocodingclub.com")
+
 playerId = mc.getPlayerEntityId("TCCMinecraft001")
 
 block_to_spawn = 38

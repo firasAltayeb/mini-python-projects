@@ -1,5 +1,4 @@
 from mcpi.minecraft import Minecraft
-
 mc = Minecraft.create("mc.tokyocodingclub.com")
 
 position = mc.entity.getTilePos("TCCMinecraft001")
