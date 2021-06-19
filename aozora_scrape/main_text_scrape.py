@@ -1,33 +1,51 @@
+import time
 import requests
-from time import sleep
+import concurrent.futures
 from bs4 import BeautifulSoup
-from aozora_text_sites import novel_text_sites
+from novel_text_sites import novel_text_sites
 
-for novel_text_site in novel_text_sites:
-    response = requests.get(novel_text_site)
-    response.encoding = 'shift_jis'
+HEADERS = {
+    'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) '
+                  'Chrome/53.0.2785.143 Safari/537.36'}
+MAX_THREADS = 10
 
-    soup = BeautifulSoup(response.text, 'html.parser')
-    contents = soup.find_all('body')
 
-    title = ""
+def parse(url):
     text = ""
-
     try:
-        for content in contents:
-            title = content.find(class_='title').get_text().replace('\n', '')
-            text = content.find(class_='main_text').get_text().replace('\n', '')
-    except Exception as err:
-        title = err
-        text = err
+        response = requests.get(url, headers=HEADERS, timeout=5)
+        time.sleep(2)
 
-    print(title)
-    print(text)
+        if response.status_code != 200:
+            return False
 
-    with open('aozora_text.txt', 'a+', encoding='utf-8') as file:
-        try:
-            file.write('Title: ' + title + "\n")
-            file.write('Text: ' + text + "\n")
-        except Exception as err:
-            file.write('an ERROR occurred: ' + str(err) + '\n')
-    sleep(0.5)
+        print('Processing..' + url)
+        response.encoding = 'shift_jis'
+        soup = BeautifulSoup(response.text, 'html.parser')
+        contents = soup.find_all('body')
+        if contents is not None:
+            for content in contents:
+                text = content.find(class_='main_text').get_text().replace('\n', '')
+
+    except Exception as ex:
+        print(str(ex))
+    finally:
+        with open('new_aozora_text.txt', 'a+', encoding='utf-8') as file:
+            file.write(text + "\n")
+
+
+def download_links(card_links):
+    threads = min(MAX_THREADS, len(card_links))
+
+    with concurrent.futures.ThreadPoolExecutor(max_workers=threads) as executor:
+        executor.map(parse, card_links)
+
+
+def main(story_urls):
+    t0 = time.time()
+    download_links(story_urls)
+    t1 = time.time()
+    print(f"{t1 - t0} seconds to download {len(story_urls)} stories.")
+
+
+main(novel_text_sites)
