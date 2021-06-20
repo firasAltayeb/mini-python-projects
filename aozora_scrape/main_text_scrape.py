@@ -2,7 +2,7 @@ import time
 import requests
 import concurrent.futures
 from bs4 import BeautifulSoup
-from novel_text_sites import novel_text_sites
+# from novel_text_sites import novel_text_sites
 
 HEADERS = {
     'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) '
@@ -48,4 +48,4 @@ def main(story_urls):
     print(f"{t1 - t0} seconds to download {len(story_urls)} stories.")
 
 
-main(novel_text_sites)
+# main(novel_text_sites)

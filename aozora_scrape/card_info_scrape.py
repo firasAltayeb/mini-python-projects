@@ -3,7 +3,7 @@ import time
 import requests
 import concurrent.futures
 from bs4 import BeautifulSoup
-from aozora_card_sites import aozora_card_sites
+# from aozora_card_sites import aozora_card_sites
 
 HEADERS = {
     'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) '
@@ -49,4 +49,4 @@ def main(story_urls):
     print(f"{t1-t0} seconds to download {len(story_urls)} stories.")
 
 
-main(aozora_card_sites)
+# main(aozora_card_sites)

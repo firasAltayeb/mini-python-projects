@@ -1,4 +1,4 @@
-with open("aozora_text.txt", encoding='utf-8') as file:
+with open("new_aozora_text.txt", encoding='utf-8', errors='ignore') as file:
     lines = [line.rstrip('\n') for line in file]
 
 body_text = ''.join(lines).replace("―", "").replace("　", "")
@@ -72,7 +72,7 @@ for sentence in sentences:
     elif len(sentence) == 25:
         twenty_five_char_sen_counter += 1
 
-    with open('Analysed_aozora_text.txt', 'a+', encoding='utf-8') as new_file:
+    with open('new_analysed_text.txt', 'a+', encoding='utf-8') as new_file:
         new_file.write(sentence + "。\n")
 
         if sentences[-1] == sentence:
