@@ -1,18 +1,18 @@
-from mcpi.minecraft import Minecraft
 import time
-
+from mcpi.minecraft import Minecraft
 mc = Minecraft.create("mc.tokyocodingclub.com")
 
 score = 0
 playerId = mc.getPlayerEntityId("TCCMinecraft001")
-pos = mc.entity.getPos(playerId)
-blockAbove = mc.getBlock(pos.x, pos.y + 2, pos.z)
+pos_x, pos_y, pos_z = mc.entity.getPos(playerId)
+blockAbove = mc.getBlock(pos_x, pos_y + 2, pos_z)
 
 while blockAbove == 8 or blockAbove == 9:
     time.sleep(1)
-    pos = mc.player.getTilePos()
-    blockAbove = mc.getBlock(pos.x, pos.y + 2, pos.z)
     score = score + 1
+    pos_x, pos_y, pos_z = mc.entity.getPos(playerId)
+    blockAbove = mc.getBlock(pos_x, pos_y + 2, pos_z)
+
     mc.postToChat("Current score: " + str(score))
 
 mc.postToChat("Final Score: " + str(score))

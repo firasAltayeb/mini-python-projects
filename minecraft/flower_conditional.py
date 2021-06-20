@@ -1,10 +1,9 @@
-from mcpi.minecraft import Minecraft
 from time import sleep
+from mcpi.minecraft import Minecraft
+mc = Minecraft.create("mc.tokyocodingclub.com")
 
 grass_block = 2
 flower_block = 38
-
-mc = Minecraft.create("mc.tokyocodingclub.com")
 playerId = mc.getPlayerEntityId("TCCMinecraft001")
 
 while True:
