@@ -85,7 +85,7 @@ def analyse(sentence):
             return False
 
     jlpt_n1_oriented(sentence)
-    with open('short_text_analysed.txt', 'a+', encoding='utf-8') as new_file:
+    with open('full_zora_txt_analysed.txt', 'a+', encoding='utf-8') as new_file:
         new_file.write(sentence + "\n")
 
 
