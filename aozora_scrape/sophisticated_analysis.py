@@ -85,15 +85,15 @@ def analyse(sentence):
             return False
 
     jlpt_n1_oriented(sentence)
-    with open('full_zora_txt_analysed.txt', 'a+', encoding='utf-8') as new_file:
+    with open('full_zora_txt_filtered.txt.txt', 'a+', encoding='utf-8') as new_file:
         new_file.write(sentence + "\n")
 
 
-def concurrent_run(card_links):
-    threads = min(MAX_THREADS, len(card_links))
+def concurrent_run(sens):
+    threads = min(MAX_THREADS, len(sens))
 
     with concurrent.futures.ThreadPoolExecutor(max_workers=threads) as executor:
-        executor.map(analyse, card_links)
+        executor.map(analyse, sens)
 
 
 def main(sens):

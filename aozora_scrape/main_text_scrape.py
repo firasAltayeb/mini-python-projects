@@ -12,6 +12,7 @@ MAX_THREADS = 10
 
 def parse(url):
     text = ""
+    title = ""
     try:
         response = requests.get(url, headers=HEADERS, timeout=5)
         time.sleep(2)
@@ -25,12 +26,14 @@ def parse(url):
         contents = soup.find_all('body')
         if contents is not None:
             for content in contents:
+                title = content.find(class_='title').get_text().replace('\n', '')
                 text = content.find(class_='main_text').get_text().replace('\n', '')
 
     except Exception as ex:
         print(str(ex))
     finally:
         with open('new_aozora_text.txt', 'a+', encoding='utf-8') as file:
+            file.write("\n" + 'Title: ' + title)
             file.write(text + "\n")
 
 
