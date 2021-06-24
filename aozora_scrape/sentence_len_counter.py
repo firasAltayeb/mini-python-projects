@@ -3,7 +3,6 @@ import concurrent.futures
 
 MAX_THREADS = 10
 
-five_char_sen_counter = 0
 six_char_sen_counter = 0
 seven_char_sen_counter = 0
 eight_char_sen_counter = 0
@@ -31,89 +30,86 @@ twenty_nine_char_sen_counter = 0
 thirty_char_sen_counter = 0
 
 
-def counter(sentence):
-    print(sentence)
-    if len(sentence) == 5:
-        global five_char_sen_counter
-        five_char_sen_counter += 1
-    elif len(sentence) == 6:
+def counter(sen):
+    print('analysing..' + sen)
+    if len(sen) == 6:
         global six_char_sen_counter
         six_char_sen_counter += 1
-    elif len(sentence) == 7:
+    elif len(sen) == 7:
         global seven_char_sen_counter
         seven_char_sen_counter += 1
-    elif len(sentence) == 8:
+    elif len(sen) == 8:
         global eight_char_sen_counter
         eight_char_sen_counter += 1
-    elif len(sentence) == 9:
+    elif len(sen) == 9:
         global nine_char_sen_counter
         nine_char_sen_counter += 1
-    elif len(sentence) == 10:
+    elif len(sen) == 10:
         global ten_char_sen_counter
         ten_char_sen_counter += 1
-    elif len(sentence) == 11:
+    elif len(sen) == 11:
         global eleven_char_sen_counter
         eleven_char_sen_counter += 1
-    elif len(sentence) == 12:
+    elif len(sen) == 12:
         global twelve_char_sen_counter
         twelve_char_sen_counter += 1
-    elif len(sentence) == 13:
+    elif len(sen) == 13:
         global thirteen_char_sen_counter
         thirteen_char_sen_counter += 1
-    elif len(sentence) == 14:
+    elif len(sen) == 14:
         global fourteen_char_sen_counter
         fourteen_char_sen_counter += 1
-    elif len(sentence) == 15:
+    elif len(sen) == 15:
         global fifteen_char_sen_counter
         fifteen_char_sen_counter += 1
-    elif len(sentence) == 16:
+    elif len(sen) == 16:
         global sixteen_char_sen_counter
         sixteen_char_sen_counter += 1
-    elif len(sentence) == 17:
+    elif len(sen) == 17:
         global seventeen_char_sen_counter
         seventeen_char_sen_counter += 1
-    elif len(sentence) == 18:
+    elif len(sen) == 18:
         global eighteen_char_sen_counter
         eighteen_char_sen_counter += 1
-    elif len(sentence) == 19:
+    elif len(sen) == 19:
         global nineteen_char_sen_counter
         nineteen_char_sen_counter += 1
-    elif len(sentence) == 20:
+    elif len(sen) == 20:
         global twenty_char_sen_counter
         twenty_char_sen_counter += 1
-    elif len(sentence) == 21:
+    elif len(sen) == 21:
         global twenty_one_char_sen_counter
         twenty_one_char_sen_counter += 1
-    elif len(sentence) == 22:
+    elif len(sen) == 22:
         global twenty_two_char_sen_counter
         twenty_two_char_sen_counter += 1
-    elif len(sentence) == 23:
+    elif len(sen) == 23:
         global twenty_three_char_sen_counter
         twenty_three_char_sen_counter += 1
-    elif len(sentence) == 24:
+    elif len(sen) == 24:
         global twenty_four_char_sen_counter
         twenty_four_char_sen_counter += 1
-    elif len(sentence) == 25:
+    elif len(sen) == 25:
         global twenty_five_char_sen_counter
         twenty_five_char_sen_counter += 1
-    elif len(sentence) == 26:
+    elif len(sen) == 26:
         global twenty_six_char_sen_counter
         twenty_six_char_sen_counter += 1
-    elif len(sentence) == 27:
+    elif len(sen) == 27:
         global twenty_seven_char_sen_counter
         twenty_seven_char_sen_counter += 1
-    elif len(sentence) == 28:
+    elif len(sen) == 28:
         global twenty_eight_char_sen_counter
         twenty_eight_char_sen_counter += 1
-    elif len(sentence) == 29:
+    elif len(sen) == 29:
         global twenty_nine_char_sen_counter
         twenty_nine_char_sen_counter += 1
-    elif len(sentence) == 30:
+    elif len(sen) == 30:
         global thirty_char_sen_counter
         thirty_char_sen_counter += 1
 
     with open('new_analysed_text.txt', 'a+', encoding='utf-8') as new_file:
-        new_file.write(sentence + "。\n")
+        new_file.write(sen + "\n")
 
 
 def concurrent_run(sens):
@@ -123,7 +119,6 @@ def concurrent_run(sens):
         executor.map(counter, sens)
 
     with open('new_analysed_text.txt', 'a+', encoding='utf-8') as new_file:
-        new_file.write("# of five char long sentence is {} \n".format(five_char_sen_counter))
         new_file.write("# of six char long sentence is {} \n".format(six_char_sen_counter))
         new_file.write("# of seven char long sentence is {} \n".format(seven_char_sen_counter))
         new_file.write("# of eight char long sentence is {} \n".format(eight_char_sen_counter))
@@ -157,10 +152,26 @@ def main(sens):
     print(f"{t1 - t0} seconds to analyse {len(sens)} stories.")
 
 
-with open("full_aozora_text.txt", encoding='utf-8', errors='ignore') as file:
-    lines = [line.rstrip('\n').replace("―", "").replace("　", "") for line in file]
+lines = []
+with open("aozora_full_text.txt", encoding='utf-8', errors='ignore') as file:
+    for line in file:
+        if "Title:" not in line:
+            lines.append(line.rstrip('\n').replace("―", "").replace("_", "").replace("＼", "")
+                         .replace("／", "").replace("＊", "").replace("★", "").replace("」", "")
+                         .replace("』", "").replace("「", "").replace("『", "").replace("●", "")
+                         .replace("○", "").replace("▲", "").replace("△", "").replace("┐", "")
+                         .replace("┌", "").replace("└", "").replace("┘", "").replace("├", "")
+                         .replace(" ", ""))
 
-body_text = ''.join(lines).replace("―", "").replace("　", "")
-sentences = body_text.split('。')
+body_text = ''.join(lines).replace("。", "。\n").replace("？", "？\n").replace("?", "?\n") \
+    .replace("！", "！\n").replace("!", "!\n").replace("‼", "‼\n").replace("⁉", "⁉\n") \
+    .replace("………", "…").replace("……", "…").replace("…", "…\n")
+sentences = body_text.split('\n')
 
-main(sentences)
+seen_set = set()
+for filtered_line in sentences:
+    print("filtering duplicates")
+    if len(filtered_line) >= 6 and filtered_line not in seen_set:
+        seen_set.add(filtered_line)
+
+main(seen_set)
