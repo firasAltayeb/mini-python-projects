@@ -141,7 +141,6 @@ def concurrent_run(sens):
         new_file.write("# of twenty char long sentence is {} \n".format(twenty_char_sen_counter))
         new_file.write("# of twenty one char long sentence is {} \n".format(twenty_one_char_sen_counter))
         new_file.write("# of twenty two char long sentence is {} \n".format(twenty_two_char_sen_counter))
-        new_file.write("# of twenty three char long sentence is {} \n".format(twenty_three_char_sen_counter))
         new_file.write("# of twenty four char long sentence is {} \n".format(twenty_four_char_sen_counter))
         new_file.write("# of twenty five char long sentence is {} \n".format(twenty_five_char_sen_counter))
         new_file.write("# of twenty six char long sentence is {} \n".format(twenty_six_char_sen_counter))
