@@ -12,7 +12,7 @@ def log_sentence(sentence):
 def reverse_balance(sentence):
     stack = []
     newest_sentence = ""
-    print(" reverse_balance sentence is {}".format(sentence))
+    print("checking reverse balance for {}".format(sentence))
     for i in sentence[::-1]:
         if i not in open_list and i not in close_list:
             newest_sentence = i + newest_sentence
@@ -31,7 +31,6 @@ def reverse_balance(sentence):
     if len(newest_sentence) < 6:
         return
 
-    print("reverse_balance stack len is {}".format(len(stack)))
     if len(stack) == 0 and newest_sentence not in new_seen_set:
         new_seen_set.add(newest_sentence)
         log_sentence(newest_sentence)
@@ -40,7 +39,7 @@ def reverse_balance(sentence):
 def check_balance(sentence):
     stack = []
     new_sentence = ""
-    print("check_balance sentence is {}".format(sentence))
+    print("check balance for {}".format(sentence))
     for i in sentence:
         if i not in open_list and i not in close_list:
             new_sentence += i
@@ -59,7 +58,6 @@ def check_balance(sentence):
     if len(new_sentence) < 6:
         return
 
-    print("check_balance stack len is {}".format(len(stack)))
     if len(stack) == 0 and new_sentence not in new_seen_set:
         new_seen_set.add(new_sentence)
         log_sentence(new_sentence)
@@ -68,7 +66,7 @@ def check_balance(sentence):
 
 
 def concurrent_run(sens):
-    bracket_list = ["（）席類製造）（", "（）席類製造", "（）席類{}製造", "席類製造（", "]席[類(製{造"]
+    # bracket_list = ["（）席類製造）（", "（）席類製造", "（）席類{}製造", "席類製造（", "]席[類(製{造"]
     threads = min(MAX_THREADS, len(sens))
 
     with concurrent.futures.ThreadPoolExecutor(max_workers=threads) as executor:
@@ -85,14 +83,15 @@ def main(sens):
 MAX_THREADS = 10
 
 lines = []
-with open("aozora_sample_text.txt", encoding='utf-8', errors='ignore') as file:
+with open("aozora_full_text.txt", encoding='utf-8', errors='ignore') as file:
     for line in file:
-        if "Title:" not in line:
-            lines.append(line.rstrip('\n').replace("―", "").replace("_", "").replace("＼", "")
-                         .replace("／", "").replace("＊", "").replace("★", "").replace("』", "")
-                         .replace("『", "").replace("●", "").replace("○", "").replace("▲", "")
-                         .replace("△", "").replace("┐", "").replace("┌", "").replace("└", "")
-                         .replace("┘", "").replace("├", "").replace(" ", ""))
+        if "Title:" in line:
+            continue
+        lines.append(line.rstrip('\n').replace("―", "").replace("_", "").replace("＼", "")
+                     .replace("／", "").replace("＊", "").replace("★", "").replace("』", "")
+                     .replace("『", "").replace("●", "").replace("○", "").replace("▲", "")
+                     .replace("△", "").replace("┐", "").replace("┌", "").replace("└", "")
+                     .replace("┘", "").replace("├", "").replace("　", ""))
 
 body_text = ''.join(lines).replace("。", "。\n").replace("？", "？\n").replace("?", "?\n") \
     .replace("！", "！\n").replace("!", "!\n").replace("‼", "‼\n").replace("⁉", "⁉\n") \
@@ -101,7 +100,7 @@ sentences = body_text.split('\n')
 
 seen_set = set()
 for filtered_line in sentences:
-    # print("filtering duplicates")
+    print("filtering duplicates")
     if len(filtered_line) >= 6 and filtered_line not in seen_set:
         seen_set.add(filtered_line)
 
