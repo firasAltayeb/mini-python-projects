@@ -14,7 +14,7 @@ def reverse_balance(sentence):
     newest_sentence = ""
     print("checking reverse balance for {}".format(sentence))
     for i in sentence[::-1]:
-        if i not in open_list and i not in close_list:
+        if i not in open_list + close_list:
             newest_sentence = i + newest_sentence
         if i in close_list:
             stack.append(i)
@@ -41,7 +41,7 @@ def check_balance(sentence):
     new_sentence = ""
     print("check balance for {}".format(sentence))
     for i in sentence:
-        if i not in open_list and i not in close_list:
+        if i not in open_list + close_list:
             new_sentence += i
         if i in open_list:
             stack.append(i)
@@ -88,10 +88,10 @@ with open("aozora_full_text.txt", encoding='utf-8', errors='ignore') as file:
         if "Title:" in line:
             continue
         lines.append(line.rstrip('\n').replace("―", "").replace("_", "").replace("＼", "")
-                     .replace("／", "").replace("＊", "").replace("★", "").replace("』", "")
-                     .replace("『", "").replace("●", "").replace("○", "").replace("▲", "")
-                     .replace("△", "").replace("┐", "").replace("┌", "").replace("└", "")
-                     .replace("┘", "").replace("├", "").replace("　", ""))
+                     .replace("／", "").replace("＊", "").replace("★", "").replace("●", "")
+                     .replace("○", "").replace("▲", "").replace("△", "").replace("┐", "")
+                     .replace("┌", "").replace("└", "").replace("┘", "").replace("├", "")
+                     .replace("　", ""))
 
 body_text = ''.join(lines).replace("。", "。\n").replace("？", "？\n").replace("?", "?\n") \
     .replace("！", "！\n").replace("!", "!\n").replace("‼", "‼\n").replace("⁉", "⁉\n") \

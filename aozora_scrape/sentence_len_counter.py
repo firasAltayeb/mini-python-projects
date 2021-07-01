@@ -115,7 +115,7 @@ def concurrent_run(sens):
     with concurrent.futures.ThreadPoolExecutor(max_workers=threads) as executor:
         executor.map(length_counter, sens)
 
-    with open('new_analysed_text.txt', 'a+', encoding='utf-8') as new_file:
+    with open('aozora_full_filtered.txt', 'a+', encoding='utf-8') as new_file:
         new_file.write("# of six char long sentence is {} \n".format(six_char_sen_counter))
         new_file.write("# of seven char long sentence is {} \n".format(seven_char_sen_counter))
         new_file.write("# of eight char long sentence is {} \n".format(eight_char_sen_counter))
@@ -150,7 +150,7 @@ def main(sens):
 
 
 lines = []
-with open("new_analysed_text.txt", encoding='utf-8', errors='ignore') as file:
+with open("aozora_full_filtered.txt", encoding='utf-8', errors='ignore') as file:
     lines = [line.rstrip('\n') for line in file]
 
 main(lines)
