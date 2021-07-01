@@ -1,5 +1,7 @@
 import time
 import concurrent.futures
+from allowed_characters import open_list
+from allowed_characters import close_list
 
 MAX_THREADS = 10
 
@@ -30,93 +32,152 @@ twenty_nine_char_sen_counter = 0
 thirty_char_sen_counter = 0
 
 
-def counter(sen):
-    print('analysing..' + sen)
-    if len(sen) == 6:
+def length_counter(sentence):
+    print('analysing..' + sentence)
+    if len(sentence) == 6:
         global six_char_sen_counter
         six_char_sen_counter += 1
-    elif len(sen) == 7:
+    elif len(sentence) == 7:
         global seven_char_sen_counter
         seven_char_sen_counter += 1
-    elif len(sen) == 8:
+    elif len(sentence) == 8:
         global eight_char_sen_counter
         eight_char_sen_counter += 1
-    elif len(sen) == 9:
+    elif len(sentence) == 9:
         global nine_char_sen_counter
         nine_char_sen_counter += 1
-    elif len(sen) == 10:
+    elif len(sentence) == 10:
         global ten_char_sen_counter
         ten_char_sen_counter += 1
-    elif len(sen) == 11:
+    elif len(sentence) == 11:
         global eleven_char_sen_counter
         eleven_char_sen_counter += 1
-    elif len(sen) == 12:
+    elif len(sentence) == 12:
         global twelve_char_sen_counter
         twelve_char_sen_counter += 1
-    elif len(sen) == 13:
+    elif len(sentence) == 13:
         global thirteen_char_sen_counter
         thirteen_char_sen_counter += 1
-    elif len(sen) == 14:
+    elif len(sentence) == 14:
         global fourteen_char_sen_counter
         fourteen_char_sen_counter += 1
-    elif len(sen) == 15:
+    elif len(sentence) == 15:
         global fifteen_char_sen_counter
         fifteen_char_sen_counter += 1
-    elif len(sen) == 16:
+    elif len(sentence) == 16:
         global sixteen_char_sen_counter
         sixteen_char_sen_counter += 1
-    elif len(sen) == 17:
+    elif len(sentence) == 17:
         global seventeen_char_sen_counter
         seventeen_char_sen_counter += 1
-    elif len(sen) == 18:
+    elif len(sentence) == 18:
         global eighteen_char_sen_counter
         eighteen_char_sen_counter += 1
-    elif len(sen) == 19:
+    elif len(sentence) == 19:
         global nineteen_char_sen_counter
         nineteen_char_sen_counter += 1
-    elif len(sen) == 20:
+    elif len(sentence) == 20:
         global twenty_char_sen_counter
         twenty_char_sen_counter += 1
-    elif len(sen) == 21:
+    elif len(sentence) == 21:
         global twenty_one_char_sen_counter
         twenty_one_char_sen_counter += 1
-    elif len(sen) == 22:
+    elif len(sentence) == 22:
         global twenty_two_char_sen_counter
         twenty_two_char_sen_counter += 1
-    elif len(sen) == 23:
+    elif len(sentence) == 23:
         global twenty_three_char_sen_counter
         twenty_three_char_sen_counter += 1
-    elif len(sen) == 24:
+    elif len(sentence) == 24:
         global twenty_four_char_sen_counter
         twenty_four_char_sen_counter += 1
-    elif len(sen) == 25:
+    elif len(sentence) == 25:
         global twenty_five_char_sen_counter
         twenty_five_char_sen_counter += 1
-    elif len(sen) == 26:
+    elif len(sentence) == 26:
         global twenty_six_char_sen_counter
         twenty_six_char_sen_counter += 1
-    elif len(sen) == 27:
+    elif len(sentence) == 27:
         global twenty_seven_char_sen_counter
         twenty_seven_char_sen_counter += 1
-    elif len(sen) == 28:
+    elif len(sentence) == 28:
         global twenty_eight_char_sen_counter
         twenty_eight_char_sen_counter += 1
-    elif len(sen) == 29:
+    elif len(sentence) == 29:
         global twenty_nine_char_sen_counter
         twenty_nine_char_sen_counter += 1
-    elif len(sen) == 30:
+    elif len(sentence) == 30:
         global thirty_char_sen_counter
         thirty_char_sen_counter += 1
 
     with open('new_analysed_text.txt', 'a+', encoding='utf-8') as new_file:
-        new_file.write(sen + "\n")
+        new_file.write(sentence + "\n")
+
+
+def reverse_balance(sentence):
+    stack = []
+    newest_sentence = ""
+    print(" reverse_balance sentence is {}".format(sentence))
+    for i in sentence[::-1]:
+        if i not in open_list and i not in close_list:
+            newest_sentence = i + newest_sentence
+        if i in close_list:
+            stack.append(i)
+            newest_sentence = i + newest_sentence
+        elif i in open_list:
+            pos = open_list.index(i)
+            if ((len(stack) > 0) and
+                    (close_list[pos] == stack[len(stack) - 1])):
+                stack.pop()
+                newest_sentence = i + newest_sentence
+            else:
+                print("Excluding ", i)
+
+    if len(newest_sentence) < 6:
+        return
+
+    print("stack length is {}".format(len(stack)))
+    if len(stack) == 0 and newest_sentence not in new_seen_set:
+        new_seen_set.add(newest_sentence)
+        length_counter(newest_sentence)
+
+
+def check_balance(sentence):
+    stack = []
+    new_sentence = ""
+    print("check_balance sentence is {}".format(sentence))
+    for i in sentence:
+        if i not in open_list and i not in close_list:
+            new_sentence += i
+        if i in open_list:
+            stack.append(i)
+            new_sentence += i
+        elif i in close_list:
+            pos = close_list.index(i)
+            if ((len(stack) > 0) and
+                    (open_list[pos] == stack[len(stack) - 1])):
+                stack.pop()
+                new_sentence += i
+            else:
+                print("Excluding ", i)
+
+    if len(new_sentence) < 6:
+        return
+
+    print("stack length is {}".format(len(stack)))
+    if len(stack) == 0 and new_sentence not in new_seen_set:
+        new_seen_set.add(new_sentence)
+        length_counter(new_sentence)
+    else:
+        reverse_balance(new_sentence)
 
 
 def concurrent_run(sens):
+    bracket_list = ["（）席類製造）（", "（）席類製造", "（）席類{}製造", "席類製造（", "]席[類(製{造"]
     threads = min(MAX_THREADS, len(sens))
 
     with concurrent.futures.ThreadPoolExecutor(max_workers=threads) as executor:
-        executor.map(counter, sens)
+        executor.map(check_balance, sens)
 
     with open('new_analysed_text.txt', 'a+', encoding='utf-8') as new_file:
         new_file.write("# of six char long sentence is {} \n".format(six_char_sen_counter))
@@ -153,15 +214,14 @@ def main(sens):
 
 
 lines = []
-with open("aozora_full_text.txt", encoding='utf-8', errors='ignore') as file:
+with open("aozora_sample_text.txt", encoding='utf-8', errors='ignore') as file:
     for line in file:
         if "Title:" not in line:
             lines.append(line.rstrip('\n').replace("―", "").replace("_", "").replace("＼", "")
-                         .replace("／", "").replace("＊", "").replace("★", "").replace("」", "")
-                         .replace("』", "").replace("「", "").replace("『", "").replace("●", "")
-                         .replace("○", "").replace("▲", "").replace("△", "").replace("┐", "")
-                         .replace("┌", "").replace("└", "").replace("┘", "").replace("├", "")
-                         .replace(" ", ""))
+                         .replace("／", "").replace("＊", "").replace("★", "").replace("』", "")
+                         .replace("『", "").replace("●", "").replace("○", "").replace("▲", "")
+                         .replace("△", "").replace("┐", "").replace("┌", "").replace("└", "")
+                         .replace("┘", "").replace("├", "").replace(" ", ""))
 
 body_text = ''.join(lines).replace("。", "。\n").replace("？", "？\n").replace("?", "?\n") \
     .replace("！", "！\n").replace("!", "!\n").replace("‼", "‼\n").replace("⁉", "⁉\n") \
@@ -174,4 +234,5 @@ for filtered_line in sentences:
     if len(filtered_line) >= 6 and filtered_line not in seen_set:
         seen_set.add(filtered_line)
 
+new_seen_set = set()
 main(seen_set)
