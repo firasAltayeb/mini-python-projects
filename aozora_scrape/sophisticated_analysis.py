@@ -74,15 +74,24 @@ def jlpt_n1_oriented(sentence):
 
 
 def analyse(sentence):
-    if not 6 <= len(sentence) <= 30:
-        return
-
     print(sentence)
+    number_of_chara = 0
+    open_bracket_found = False
+
     for character in sentence:
         if character not in kana_List + latin_characters \
                 + filtered_kanji + jlpt_n1_characters + jouyou_kanji:
             print("{} is out of scope".format(character))
             return False
+        if character == '（':
+            open_bracket_found = True
+        if not open_bracket_found and character in kana_List:
+            number_of_chara += 1
+        if character == '）':
+            open_bracket_found = False
+
+    if not 6 <= number_of_chara <= 30:
+        return
 
     jlpt_n1_oriented(sentence)
 
