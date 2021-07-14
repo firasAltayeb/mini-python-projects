@@ -1,6 +1,6 @@
-from greeter import GreeterJames
-from greeter import GreeterMark
-from greeter import GreeterHaruna
+from greeter_class import GreeterJames
+from greeter_class import GreeterMark
+from greeter_class import GreeterHaruna
 
 first_greeter = GreeterJames()
 second_greeter = GreeterMark()
