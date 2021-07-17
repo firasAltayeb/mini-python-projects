@@ -1,13 +1,12 @@
-file = open("giant_egg_input.txt", "r")
-outfile = open("giant_egg_script.py", "w")
+file = open("charizard.txt", "r")
+outfile = open("charizard.py", "w")
 
 outfile.write("from mcpi.minecraft import Minecraft\n")
-outfile.write("mc = Minecraft.create()\n")
+outfile.write('mc = Minecraft.create("mc.tokyocodingclub.com")\n')
+outfile.write('playerId = mc.getPlayerEntityId("TCCMinecraft008")\n\n')
 
-outfile.write("pos_x = 100\n")
-outfile.write("pos_y = 30\n")
-outfile.write("pos_z = 100\n")
-outfile.write("block_id = 42\n")
+outfile.write("pos_x, pos_y, pos_z = mc.entity.getPos(playerId)\n")
+outfile.write("block_id = 155\n\n")
 
 for lines in file:
     line = lines[:-1].replace(" ", "").split(",")

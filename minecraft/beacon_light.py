@@ -1,7 +1,8 @@
 from mcpi.minecraft import Minecraft
 mc = Minecraft.create("mc.tokyocodingclub.com")
+playerId = mc.getPlayerEntityId("TCCMinecraft001")
 
-position = mc.entity.getTilePos("TCCMinecraft001")
+position = mc.entity.getPos(playerId)
 x = position.x
 y = position.y
 z = position.z

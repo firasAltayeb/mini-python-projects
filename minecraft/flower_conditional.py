@@ -1,10 +1,10 @@
 from time import sleep
 from mcpi.minecraft import Minecraft
 mc = Minecraft.create("mc.tokyocodingclub.com")
+playerId = mc.getPlayerEntityId("TCCMinecraft008")
 
 grass_block = 2
 flower_block = 38
-playerId = mc.getPlayerEntityId("TCCMinecraft001")
 
 while True:
     position = mc.entity.getPos(playerId)
