@@ -2,7 +2,7 @@ from time import sleep
 from mcpi.minecraft import Minecraft
 mc = Minecraft.create("mc.tokyocodingclub.com")
 
-playerId = mc.getPlayerEntityId("TCCMinecraft001")
+playerId = mc.getPlayerEntityId("TCCMinecraft008")
 x, y, z = mc.entity.getPos(playerId)
 
 
