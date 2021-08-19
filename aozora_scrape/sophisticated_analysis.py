@@ -10,6 +10,8 @@ from allowed_characters import jlpt_n3_characters
 from allowed_characters import jlpt_n2_characters
 from allowed_characters import jlpt_n1_characters
 
+MAX_THREADS = 10
+
 
 def jlpt_n5_oriented(sentence):
     for character in sentence:
@@ -83,6 +85,7 @@ def analyse(sentence):
                 + filtered_kanji + jlpt_n1_characters + jouyou_kanji:
             print("{} is out of scope".format(character))
             return False
+        # this is to ignore furigana
         if character == '（':
             open_bracket_found = True
         if not open_bracket_found and character in kana_List:
@@ -113,7 +116,6 @@ def main(sens):
     print(f"{t1 - t0} seconds to analyse {len(sens)} stories.")
 
 
-MAX_THREADS = 10
 with open("aozora_full_filtered.txt", encoding='utf-8', errors='ignore') as file:
     lines = [line.rstrip('\n') for line in file]
 
