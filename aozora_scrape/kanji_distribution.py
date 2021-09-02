@@ -3,6 +3,7 @@ import concurrent.futures
 from allowed_characters import filtered_kanji
 
 MAX_THREADS = 10
+kanji_dic = {kanji[1]: 0 for kanji in enumerate(filtered_kanji)}
 
 
 def check_occurrence(sentence):
@@ -32,7 +33,5 @@ def main(sens):
 
 with open("aozora_master_list.txt", encoding='utf-8', errors='ignore') as file:
     lines = [line.rstrip('\n') for line in file]
-
-kanji_dic = {kanji[1]: 0 for kanji in enumerate(filtered_kanji)}
 
 main(lines)

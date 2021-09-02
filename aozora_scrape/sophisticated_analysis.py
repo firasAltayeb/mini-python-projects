@@ -21,7 +21,6 @@ def jlpt_n5_oriented(sentence):
 
     with open('n5_muke_sentences.txt', 'a+', encoding='utf-8') as new_file:
         new_file.write(sentence + "\n")
-    return True
 
 
 def jlpt_n4_oriented(sentence):
@@ -33,7 +32,6 @@ def jlpt_n4_oriented(sentence):
     jlpt_n5_oriented(sentence)
     with open('n4_muke_sentences.txt', 'a+', encoding='utf-8') as new_file:
         new_file.write(sentence + "\n")
-    return True
 
 
 def jlpt_n3_oriented(sentence):
@@ -46,7 +44,6 @@ def jlpt_n3_oriented(sentence):
     jlpt_n4_oriented(sentence)
     with open('n3_muke_sentences.txt', 'a+', encoding='utf-8') as new_file:
         new_file.write(sentence + "\n")
-    return True
 
 
 def jlpt_n2_oriented(sentence):
@@ -59,7 +56,6 @@ def jlpt_n2_oriented(sentence):
     jlpt_n3_oriented(sentence)
     with open('n2_muke_sentences.txt', 'a+', encoding='utf-8') as new_file:
         new_file.write(sentence + "\n")
-    return True
 
 
 def jlpt_n1_oriented(sentence):
@@ -72,7 +68,6 @@ def jlpt_n1_oriented(sentence):
     jlpt_n2_oriented(sentence)
     with open('n1_muke_sentences.txt', 'a+', encoding='utf-8') as new_file:
         new_file.write(sentence + "\n")
-    return True
 
 
 def analyse(sentence):
