@@ -1,7 +1,7 @@
 import time
 import concurrent.futures
 
-from allowed_characters import kana_List
+from allowed_characters import kana_characters
 
 MAX_THREADS = 10
 
@@ -40,7 +40,7 @@ def length_counter(sentence):
     for character in sentence:
         if character == '（':
             furigana_bracket_found = True
-        if not furigana_bracket_found and character in kana_List:
+        if not furigana_bracket_found and character in kana_characters:
             number_of_chara += 1
         if character == '）':
             furigana_bracket_found = False

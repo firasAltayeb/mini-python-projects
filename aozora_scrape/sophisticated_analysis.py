@@ -1,6 +1,6 @@
 import time
 import concurrent.futures
-from allowed_characters import kana_List
+from allowed_characters import kana_characters
 from allowed_characters import jouyou_kanji
 from allowed_characters import filtered_kanji
 from allowed_characters import latin_characters
@@ -15,7 +15,7 @@ MAX_THREADS = 10
 
 def jlpt_n5_oriented(sentence):
     for character in sentence:
-        if character not in jlpt_n5_characters + kana_List + latin_characters:
+        if character not in jlpt_n5_characters + kana_characters + latin_characters:
             print("above sentence is not n5 oriented")
             return False
 
@@ -25,7 +25,7 @@ def jlpt_n5_oriented(sentence):
 
 def jlpt_n4_oriented(sentence):
     for character in sentence:
-        if character not in jlpt_n5_characters + jlpt_n4_characters + kana_List + latin_characters:
+        if character not in jlpt_n5_characters + jlpt_n4_characters + kana_characters + latin_characters:
             print("above sentence is not n5 oriented")
             return False
 
@@ -37,7 +37,7 @@ def jlpt_n4_oriented(sentence):
 def jlpt_n3_oriented(sentence):
     for character in sentence:
         if character not in jlpt_n5_characters + jlpt_n4_characters + jlpt_n3_characters \
-                + kana_List + latin_characters:
+                + kana_characters + latin_characters:
             print("above sentence is not n5 oriented")
             return False
 
@@ -49,7 +49,7 @@ def jlpt_n3_oriented(sentence):
 def jlpt_n2_oriented(sentence):
     for character in sentence:
         if character not in jlpt_n5_characters + jlpt_n4_characters + jlpt_n3_characters \
-                + jlpt_n2_characters + kana_List + latin_characters:
+                + jlpt_n2_characters + kana_characters + latin_characters:
             print("above sentence is not n5 oriented")
             return False
 
@@ -61,7 +61,7 @@ def jlpt_n2_oriented(sentence):
 def jlpt_n1_oriented(sentence):
     for character in sentence:
         if character not in jlpt_n5_characters + jlpt_n4_characters + jlpt_n3_characters \
-                + jlpt_n2_characters + jlpt_n1_characters + kana_List + latin_characters:
+                + jlpt_n2_characters + jlpt_n1_characters + kana_characters + latin_characters:
             print("above sentence is not n5 oriented")
             return False
 
@@ -76,14 +76,14 @@ def analyse(sentence):
     open_bracket_found = False
 
     for character in sentence:
-        if character not in kana_List + latin_characters \
+        if character not in kana_characters + latin_characters \
                 + filtered_kanji + jlpt_n1_characters + jouyou_kanji:
             print("{} is out of scope".format(character))
             return False
         # this is to ignore furigana
         if character == '（':
             open_bracket_found = True
-        if not open_bracket_found and character in kana_List:
+        if not open_bracket_found and character in kana_characters:
             number_of_chara += 1
         if character == '）':
             open_bracket_found = False
