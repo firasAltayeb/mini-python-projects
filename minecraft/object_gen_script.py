@@ -1,5 +1,5 @@
-file = open("charizard.txt", "r")
-outfile = open("charizard.py", "w")
+file = open("kyogre_size_100.txt", "r")
+outfile = open("kyogre.py", "w")
 
 outfile.write("from mcpi.minecraft import Minecraft\n")
 outfile.write('mc = Minecraft.create("mc.tokyocodingclub.com")\n')
