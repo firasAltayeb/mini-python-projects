@@ -1,6 +1,6 @@
 from time import sleep
 from mcpi.minecraft import Minecraft
-mc = Minecraft.create("mc.tokyocodingclub.com")
+mc = Minecraft.create("mc2.tokyocodingclub.com")
 
 diamond = 57
 beacon = 138
@@ -9,7 +9,7 @@ lava = 10
 water = 8
 air = 0
 
-playerId = mc.getPlayerEntityId("TCCMinecraft001")
+playerId = mc.getPlayerEntityId("TCCMinecraft008")
 x, y, z = mc.entity.getPos(playerId)
 playerIds = mc.getPlayerEntityIds()
 

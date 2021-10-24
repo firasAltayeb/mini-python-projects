@@ -3,7 +3,7 @@ mc = Minecraft.create("mc.tokyocodingclub.com")
 
 points = int(input("Enter your points: "))
 
-if points > 6:
+if points > 6:  
     mc.player.setTilePos(249, 79, -430)
 elif points > 4:
     mc.player.setTilePos(-60, 96, 32)
