@@ -1,16 +1,23 @@
 from mcpi.minecraft import Minecraft
+
 mc = Minecraft.create("mc.tokyocodingclub.com")
 
-playerIds = mc.getPlayerEntityIds()
 playerId = mc.getPlayerEntityId("TCCMinecraft008")
-pidX, pidY, pidY = mc.entity.getPos(playerId)
 
-x = 144
-y = 100
-z = 50
-
-mc.entity.setTilePos(playerId, x, y, z)
-
-if playerId == playerIds[1]:
-    mc.player.setTilePos(pidX, pidY, pidY)
-
+mc.postToChat("Enter coordinates:")
+while True:
+    chats = mc.events.pollChatPosts()
+    firasId = mc.getPlayerEntityId("TCCMinecraft008")
+    firasX, firasY, firasZ = mc.entity.getPos(playerId)
+    for chat in chats:
+        try:
+            if any(char.isdigit() for char in chat.message):
+                coordinates = chat.message.split(",")
+                x = int(coordinates[0])
+                y = int(coordinates[2])
+                z = int(coordinates[2])
+                mc.entity.setTilePos(playerId, x, y, z)
+            elif 'tp to fira' in chat.message:
+                mc.entity.setTilePos(playerId, firasX, firasY, firasZ)
+        except:
+            print("bad input")
