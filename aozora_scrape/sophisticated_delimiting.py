@@ -3,6 +3,9 @@ import concurrent.futures
 from allowed_characters import open_list
 from allowed_characters import close_list
 
+MAX_THREADS = 10
+new_seen_set = set()
+
 
 def log_sentence(sentence):
     with open('new_analysed_text.txt', 'a+', encoding='utf-8') as new_file:
@@ -11,29 +14,26 @@ def log_sentence(sentence):
 
 def reverse_balance(sentence):
     stack = []
-    newest_sentence = ""
+    new_sentence = ""
     print("checking reverse balance for {}".format(sentence))
     for i in sentence[::-1]:
         if i not in open_list + close_list:
-            newest_sentence = i + newest_sentence
+            new_sentence = i + new_sentence
         if i in close_list:
             stack.append(i)
-            newest_sentence = i + newest_sentence
+            new_sentence = i + new_sentence
         elif i in open_list:
             pos = open_list.index(i)
             if ((len(stack) > 0) and
                     (close_list[pos] == stack[len(stack) - 1])):
                 stack.pop()
-                newest_sentence = i + newest_sentence
+                new_sentence = i + new_sentence
             else:
                 print("Excluding ", i)
 
-    if len(newest_sentence) < 6:
-        return
-
-    if len(stack) == 0 and newest_sentence not in new_seen_set:
-        new_seen_set.add(newest_sentence)
-        log_sentence(newest_sentence)
+    if len(stack) == 0 and new_sentence not in new_seen_set:
+        new_seen_set.add(new_sentence)
+        log_sentence(new_sentence)
 
 
 def check_balance(sentence):
@@ -55,9 +55,6 @@ def check_balance(sentence):
             else:
                 print("Excluding ", i)
 
-    if len(new_sentence) < 6:
-        return
-
     if len(stack) == 0 and new_sentence not in new_seen_set:
         new_seen_set.add(new_sentence)
         log_sentence(new_sentence)
@@ -73,36 +70,34 @@ def concurrent_run(sens):
         executor.map(check_balance, sens)
 
 
-def main(sens):
+def main():
+    lines = []
+    with open("aozora_full_text.txt", encoding='utf-8', errors='ignore') as file:
+        for line in file:
+            if "Title:" in line:
+                continue
+            lines.append(line.rstrip('\n').replace("―", "").replace("_", "").replace("＼", "")
+                         .replace("／", "").replace("＊", "").replace("★", "").replace("●", "")
+                         .replace("○", "").replace("▲", "").replace("△", "").replace("┐", "")
+                         .replace("┌", "").replace("└", "").replace("┘", "").replace("├", "")
+                         .replace("　", ""))
+
+    body_text = ''.join(lines).replace("。", "。\n").replace("？", "？\n").replace("?", "?\n") \
+        .replace("！", "！\n").replace("!", "!\n").replace("‼", "‼\n").replace("⁉", "⁉\n") \
+        .replace("………", "…").replace("……", "…").replace("…", "…\n")
+    sentences = body_text.split('\n')
+
+    seen_set = set()
+    # check if after delimiting duplicates arise
+    for delimited_line in sentences:
+        print("filtering duplicates")
+        if delimited_line not in seen_set:
+            seen_set.add(delimited_line)
+
     t0 = time.time()
-    concurrent_run(sens)
+    concurrent_run(seen_set)
     t1 = time.time()
-    print(f"{t1 - t0} seconds to analyse {len(sens)} stories.")
+    print(f"{t1 - t0} seconds to analyse {len(seen_set)} stories.")
 
 
-MAX_THREADS = 10
-
-lines = []
-with open("aozora_full_text.txt", encoding='utf-8', errors='ignore') as file:
-    for line in file:
-        if "Title:" in line:
-            continue
-        lines.append(line.rstrip('\n').replace("―", "").replace("_", "").replace("＼", "")
-                     .replace("／", "").replace("＊", "").replace("★", "").replace("●", "")
-                     .replace("○", "").replace("▲", "").replace("△", "").replace("┐", "")
-                     .replace("┌", "").replace("└", "").replace("┘", "").replace("├", "")
-                     .replace("　", ""))
-
-body_text = ''.join(lines).replace("。", "。\n").replace("？", "？\n").replace("?", "?\n") \
-    .replace("！", "！\n").replace("!", "!\n").replace("‼", "‼\n").replace("⁉", "⁉\n") \
-    .replace("………", "…").replace("……", "…").replace("…", "…\n")
-sentences = body_text.split('\n')
-
-seen_set = set()
-for filtered_line in sentences:
-    print("filtering duplicates")
-    if len(filtered_line) >= 6 and filtered_line not in seen_set:
-        seen_set.add(filtered_line)
-
-new_seen_set = set()
-main(seen_set)
+main()
