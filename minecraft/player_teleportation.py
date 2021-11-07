@@ -11,7 +11,8 @@ while True:
     firasX, firasY, firasZ = mc.entity.getPos(playerId)
     for chat in chats:
         try:
-            if any(char.isdigit() for char in chat.message):
+            if all(char.isdigit() or char == ',' or char == '-'
+                   for char in chat.message):
                 coordinates = chat.message.split(",")
                 x = int(coordinates[0])
                 y = int(coordinates[2])
