@@ -1,14 +1,15 @@
-import time
-import concurrent.futures
-from allowed_characters import kana_characters
-from allowed_characters import jouyou_kanji
-from allowed_characters import filteredInKanji
-from allowed_characters import latin_characters
 from allowed_characters import jlpt_n5_characters
 from allowed_characters import jlpt_n4_characters
 from allowed_characters import jlpt_n3_characters
 from allowed_characters import jlpt_n2_characters
 from allowed_characters import jlpt_n1_characters
+from allowed_characters import latin_characters
+from allowed_characters import kana_characters
+from allowed_characters import filteredInKanji
+from allowed_characters import katakanaList
+from allowed_characters import jouyou_kanji
+import concurrent.futures
+import time
 
 MAX_THREADS = 10
 
@@ -70,13 +71,16 @@ def jlpt_n1_oriented(sentence):
         new_file.write(sentence + "\n")
 
 
-def analyse(ja_sentence, en_sentence):
+def filter_sentences(ja_sentence, en_sentence):
     print(ja_sentence)
     number_of_chara = 0
     open_bracket_found = False
 
-    # if sum(c in filteredInKanji for c in ja_sentence) == 0:
-    #     return False
+    if sum(c in katakanaList for c in ja_sentence) != 0:
+        return False
+
+    if ja_sentence[0] == "と" or ja_sentence[0] == "が":
+        return False
 
     for character in ja_sentence:
         if character not in kana_characters + latin_characters \
@@ -101,21 +105,21 @@ def analyse(ja_sentence, en_sentence):
 
 
 def concurrent_run(sens):
-    # print("filtering characters")
-    # for j in range(0, len(sens), 2):
-    #     analyse(sens[j], sens[j+1])
+    print("filtering characters")
+    for j in range(0, len(sens), 2):
+        filter_sentences(sens[j], sens[j+1])
 
-    threads = min(MAX_THREADS, len(sens))
-    with concurrent.futures.ThreadPoolExecutor(max_workers=threads) as executor:
-        executor.map(analyse, sens)
+    # threads = min(MAX_THREADS, len(sens))
+    # with concurrent.futures.ThreadPoolExecutor(max_workers=threads) as executor:
+    #     executor.map(filter_sentences, sens)
 
 
 def main():
-    with open("translation_pairs.txt", encoding='utf-8', errors='ignore') as file:
+    with open("aozora_translation_filtered.txt", encoding='utf-8', errors='ignore') as file:
         lines = [line.rstrip('\n') for line in file]
 
     # seen_list = []
-    # # set by 2 to avoid scanning en translations
+    # # step with 2 to avoid scanning en translations
     # for i in range(0, len(lines), 2):
     #     if sum(c in filteredInKanji for c in lines[i]) == 0:
     #         continue

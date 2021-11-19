@@ -14,7 +14,7 @@ def translate_text(sentence):
     result = translate_client.translate(sentence, source_language='ja', target_language='en', format_="text")
     print("Translation: {}".format(result["translatedText"]))
 
-    with open('aozora_master_qna.txt', 'a+', encoding='utf-8') as new_file:
+    with open('aozora_translation_pairs.txt', 'a+', encoding='utf-8') as new_file:
         new_file.write(sentence + "\n")
         new_file.write(result['translatedText'] + "\n")
 

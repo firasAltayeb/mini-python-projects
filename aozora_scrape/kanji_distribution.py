@@ -1,9 +1,9 @@
 import time
 import concurrent.futures
-from allowed_characters import filtered_kanji
+from allowed_characters import filteredInKanji
 
 MAX_THREADS = 10
-kanji_dic = {kanji[1]: 0 for kanji in enumerate(filtered_kanji)}
+kanji_dic = {kanji[1]: 0 for kanji in enumerate(filteredInKanji)}
 
 
 def check_occurrence(sentence):
@@ -21,7 +21,7 @@ def concurrent_run(sens):
         executor.map(check_occurrence, sens)
 
     for key, value in kanji_dic.items():
-        print(key, ' : ', value, file=open('master_distribution.txt', 'a+', encoding='utf-8'))
+        print(key, ' : ', value, file=open('tanaka_distribution.txt', 'a+', encoding='utf-8'))
 
 
 def main(sens):
@@ -31,7 +31,7 @@ def main(sens):
     print(f"{t1 - t0} seconds to analyse {len(sens)} stories.")
 
 
-with open("aozora_master_list.txt", encoding='utf-8', errors='ignore') as file:
+with open("tanaka_corpus_en_filtered.txt", encoding='utf-8', errors='ignore') as file:
     lines = [line.rstrip('\n') for line in file]
 
 main(lines)
