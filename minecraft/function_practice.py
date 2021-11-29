@@ -32,14 +32,17 @@ def game_over():
     while True:
         sleep(1)
         chats = mc.events.pollChatPosts()
-
-        for chat in chats:
-            if chat.message == 'kill player':
-                mc.entity.setTilePos(playerIds[1], x, -100, z)
-            elif chat.message == 'lava fountain':
-                lava_fountain()
-            elif chat.message == 'diamond beacon':
-                create_beacon()
+        try:
+            for chat in chats:
+                if 'kill player' in chats.message:
+                    number = int(chats.message[-1])
+                    mc.entity.setTilePos(playerIds[number], x, -100, z)
+                elif chat.message == 'lava fountain':
+                    lava_fountain()
+                elif chat.message == 'diamond beacon':
+                    create_beacon()
+        except:
+            print("Bad input")
 
 
 game_over()
