@@ -14,11 +14,11 @@ x, y, z = mc.entity.getPos(playerId)
 playerIds = mc.getPlayerEntityIds()
 
 
-def lava_fountain():
+def lava_fountain(rest_time: int = 5):
     mc.setBlock(x+3, y+3, z, lava)
-    sleep(20)
+    sleep(rest_time*4)
     mc.setBlock(x+3, y+5, z, water)
-    sleep(4)
+    sleep(rest_time)
     mc.setBlock(x+3, y+5, z, air)
 
 
@@ -34,8 +34,8 @@ def game_over():
         chats = mc.events.pollChatPosts()
         try:
             for chat in chats:
-                if 'kill player' in chats.message:
-                    number = int(chats.message[-1])
+                if 'kill player' in chat.message:
+                    number = int(chat.message[-1])
                     mc.entity.setTilePos(playerIds[number], x, -100, z)
                 elif chat.message == 'lava fountain':
                     lava_fountain()
