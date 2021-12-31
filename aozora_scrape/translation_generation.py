@@ -1,17 +1,20 @@
+import concurrent.futures
 import os
 import time
-import concurrent.futures
+
 from google.cloud import translate_v2
 
 MAX_THREADS = 10
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = r"C:\Users\tayeb\Downloads\Miscellaneous\kanjimaster_cloudkey.json"
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] \
+    = r"C:\Users\tayeb\Downloads\Miscellaneous\kanjimaster_cloudkey.json"
 
 translate_client = translate_v2.Client()
 
 
 def translate_text(sentence):
     print('checking ' + sentence)
-    result = translate_client.translate(sentence, source_language='ja', target_language='en', format_="text")
+    result = translate_client. \
+        translate(sentence, source_language='ja', target_language='en', format_="text")
     print("Translation: {}".format(result["translatedText"]))
 
     with open('aozora_translation_pairs.txt', 'a+', encoding='utf-8') as new_file:
