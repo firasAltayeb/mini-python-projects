@@ -12,7 +12,7 @@ def check_occurrence(ja_sentence, en_sentence):
     if any(word.lower() not in json_dict for word in punctuation_less.split()):
         return False
     print('passed check')
-    with open('temp_two.txt', 'a+', encoding='utf-8') as new_file:
+    with open('temp.txt', 'a+', encoding='utf-8') as new_file:
         new_file.write(ja_sentence + "\n")
         new_file.write(en_sentence + "\n")
 
@@ -23,7 +23,7 @@ def concurrent_run(sens):
 
 
 def main():
-    with open("aozora_translation_filtered.txt", encoding='utf-8', errors='ignore') as file:
+    with open("tanaka_corpus_filtered.txt", encoding='utf-8', errors='ignore') as file:
         lines = [line.rstrip('\n') for line in file]
 
     t0 = time.time()
