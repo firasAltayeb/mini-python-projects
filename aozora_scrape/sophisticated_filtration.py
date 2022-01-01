@@ -2,6 +2,7 @@ import concurrent.futures
 import time
 
 from allowed_characters import filteredInKanji
+from allowed_characters import katakana_characters
 from allowed_characters import jlpt_n1_characters
 from allowed_characters import jlpt_n2_characters
 from allowed_characters import jlpt_n3_characters
@@ -9,6 +10,7 @@ from allowed_characters import jlpt_n4_characters
 from allowed_characters import jlpt_n5_characters
 from allowed_characters import kana_characters
 from allowed_characters import latin_characters
+from allowed_characters import jouyou_kanji
 from allowed_characters import numerical_digits
 from allowed_characters import symbols_n_signs
 
@@ -76,14 +78,14 @@ def jlpt_n1_oriented(sentence):
         new_file.write(sentence + "\n")
 
 
-def filter_sentences(ja_sentence):
+def filter_sentences(ja_sentence, en_sentence):
     print(ja_sentence)
     number_of_chara = 0
     open_bracket_found = False
 
     # # remove sentences with katakana - only for aozora
-    # if sum(c in katakanaList for c in ja_sentence) != 0:
-    #     return False
+    if sum(c in katakana_characters for c in ja_sentence) != 0:
+        return False
 
     # # remove sentences starting with particles
     if ja_sentence[0] == "と" or ja_sentence[0] == "が":
@@ -91,7 +93,7 @@ def filter_sentences(ja_sentence):
 
     # remove characters not taught by Kanji asap
     for character in ja_sentence:
-        if character not in kana_characters + latin_characters + filteredInKanji \
+        if character not in kana_characters + latin_characters + jouyou_kanji \
                 + jlpt_n1_characters + numerical_digits + symbols_n_signs:
             print("{} is out of scope".format(character))
             return False
@@ -112,38 +114,39 @@ def filter_sentences(ja_sentence):
 
     # jlpt_n1_oriented(ja_sentence)
 
-    with open('temp.txt', 'a+', encoding='utf-8') as new_file:
+    with open('aozora_translation_filtered_new.txt', 'a+', encoding='utf-8') as new_file:
         new_file.write(ja_sentence + "\n")
-        # new_file.write(en_sentence + "\n")
+        new_file.write(en_sentence + "\n")
 
 
 def concurrent_run(sens):
-    # print("filtering characters")
-    # for j in range(0, len(sens), 2):
-    #     filter_sentences(sens[j], sens[j+1])
-    threads = min(MAX_THREADS, len(sens))
-    with concurrent.futures.ThreadPoolExecutor(max_workers=threads) as executor:
-        executor.map(filter_sentences, sens)
+    print("filtering characters")
+    for j in range(0, len(sens), 2):
+        filter_sentences(sens[j], sens[j + 1])
+    # threads = min(MAX_THREADS, len(sens))
+    # with concurrent.futures.ThreadPoolExecutor(max_workers=threads) as executor:
+    #     executor.map(filter_sentences, sens)
 
 
 def main():
-    with open("example_sentences.txt", encoding='utf-8', errors='ignore') as file:
+    with open("aozora_translation_pairs.txt", encoding='utf-8', errors='ignore') as file:
         lines = [line.rstrip('\n') for line in file]
 
-    # seen_list = []
-    # # step with 2 to avoid scanning en translations
-    # for i in range(0, len(lines), 2):
-    #     if sum(c in filteredInKanji for c in lines[i]) == 0:
-    #         continue
-    #     if lines[i] not in seen_list:
-    #         print("not seen {}".format(lines[i]))
-    #         seen_list.append(lines[i])
-    #         seen_list.append(lines[i+1])
+    seen_list = []
+    # check if sentences contain at least one relevant kanji
+    # step with 2 to avoid scanning en translations
+    for i in range(0, len(lines), 2):
+        if sum(c in filteredInKanji for c in lines[i]) == 0:
+            continue
+        if lines[i] not in seen_list:
+            print("not seen {}".format(lines[i]))
+            seen_list.append(lines[i])
+            seen_list.append(lines[i + 1])
 
     t0 = time.time()
-    concurrent_run(lines)
+    concurrent_run(seen_list)
     t1 = time.time()
-    print(f"{t1 - t0} seconds to analyse {len(lines)} items.")
+    print(f"{t1 - t0} seconds to analyse {len(seen_list)} items.")
 
 
 main()

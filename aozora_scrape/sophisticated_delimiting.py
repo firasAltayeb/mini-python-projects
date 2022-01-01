@@ -30,7 +30,7 @@ def reverse_balance(sentence):
                 new_sentence = i + new_sentence
             else:
                 print("Excluding ", i)
-
+    # check if after exclusion duplicates arise
     if len(stack) == 0 and new_sentence not in balanced_sentence_set:
         balanced_sentence_set.add(new_sentence)
         log_sentence(new_sentence)
@@ -55,8 +55,8 @@ def check_balance(sentence):
             else:
                 print("Excluding ", i)
     # log sentence with removed awkward sentences
+    # check if after exclusion duplicates arise
     if len(stack) == 0 and new_sentence not in balanced_sentence_set:
-        # check if after exclusion duplicates arise
         balanced_sentence_set.add(new_sentence)
         log_sentence(new_sentence)
     else:

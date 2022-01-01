@@ -1,8 +1,10 @@
+import string
+import time
+
 from wanakana import to_hiragana, is_japanese, is_katakana, is_hiragana
 from allowed_characters import japanese_punctuation
 from sudachipy import dictionary
 from sudachipy import tokenizer
-import string
 
 tokenizer_obj = dictionary.Dictionary(dict="small").create()
 
@@ -28,8 +30,9 @@ def to_anki_format(index, kanji, reading):
     return '{}{}[{}]'.format(' ' if index > 0 else '', kanji, reading)
 
 
-def add_furigana(text):
-    tokens = [m for m in tokenizer_obj.tokenize(text, tokenizer.Tokenizer.SplitMode.C)]
+def add_furigana(ja_sentence):
+    print("parsing {}".format(ja_sentence))
+    tokens = [m for m in tokenizer_obj.tokenize(ja_sentence, tokenizer.Tokenizer.SplitMode.C)]
     parsed = ''
     token_indexes_to_skip = []
     for index, token in enumerate(tokens):
@@ -74,15 +77,20 @@ def add_furigana(text):
                                 break
                             else:
                                 reading_index_tail = reading_index
-                                while reading[reading_index_tail] != token.surface()[next_index] or (
-                                        reading_index_tail < len(reading) - 1 and
-                                        reading[reading_index_tail] == reading[reading_index_tail + 1]):
-                                    reading_index_tail += 1
-                                parsed += to_anki_format(
-                                    index=surface_index,
-                                    kanji=token.surface()[surface_index:next_index],
-                                    reading=reading[reading_index:reading_index_tail])
+                                try:
+                                    while reading[reading_index_tail] != token.surface()[next_index] or \
+                                            (reading_index_tail < len(reading) - 1 and
+                                             reading[reading_index_tail] == reading[reading_index_tail + 1]):
+                                        reading_index_tail += 1
+                                    parsed += to_anki_format(
+                                        index=surface_index,
+                                        kanji=token.surface()[surface_index:next_index],
+                                        reading=reading[reading_index:reading_index_tail])
+                                except:
+                                    print("omitted {}".format(ja_sentence))
+                                    return
                                 reading_index = reading_index_tail
+
                             reading_length = next_index - surface_index
                             if reading_length > 0:
                                 surface_index += reading_length
@@ -93,8 +101,23 @@ def add_furigana(text):
     return parsed
 
 
-test = ['私', '優那', 'Japanese', '可愛い', 'いい加減', '喧嘩', '咲く', '入り口', '兎に角',
-        '取り逃す', 'とり戻す', '絞り込んだ', 'この先に多数の機械生命体反応を確認', '広いな……この廃墟。']
+def concurrent_run(sens):
+    for j in range(0, len(sens), 2):
+        furigana_sentence = add_furigana(sens[j])
+        if furigana_sentence is not None:
+            with open('temp.txt', 'a+', encoding='utf-8') as new_file:
+                new_file.write(furigana_sentence + "\n")
+                new_file.write(sens[j + 1] + "\n")
 
-for s in test:
-    print(add_furigana(s))
+
+def main():
+    with open("second_part.txt", encoding='utf-8', errors='ignore') as file:
+        lines = [line.rstrip('\n') for line in file]
+
+    t0 = time.time()
+    concurrent_run(lines)
+    t1 = time.time()
+    print(f"{t1 - t0} seconds to analyse {len(lines)} items.")
+
+
+main()
