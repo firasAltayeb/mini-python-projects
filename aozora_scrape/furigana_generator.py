@@ -111,7 +111,7 @@ def concurrent_run(sens):
 
 
 def main():
-    with open("second_part.txt", encoding='utf-8', errors='ignore') as file:
+    with open("aozora_translation_filtered.txt", encoding='utf-8', errors='ignore') as file:
         lines = [line.rstrip('\n') for line in file]
 
     t0 = time.time()
