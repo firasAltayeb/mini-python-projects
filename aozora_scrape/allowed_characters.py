@@ -17,7 +17,7 @@ kana_characters = "あいうえおかきくけこさしすせそたちつてと�
 latin_characters = "abcdefghijklmnopqrstuvwxyzａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚ" \
                    "ABCDEFGHIJKLMNOPQRSTUVWXYZＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺ"
 
-symbols_n_signs = ",./;'&^[](){}*&^%?!…?　〜？！‼⁉、。・「」（）｛｝”：；～！【】『』〔〕ー"
+symbols_n_signs = " ,./;'&^[](){}*&^%?!…?　〜？！‼⁉、。・「」（）｛｝”：；～！【】『』〔〕ー"
 
 japanese_punctuation = '　〜！？。、（）：「」『』０１２３４５６７８９ａｂｃｄｅｆｇｈｉｊｋｌｍｎ' \
                        'ｏｐｑｒｓｔｕｖｗｘｙｚＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺ'
