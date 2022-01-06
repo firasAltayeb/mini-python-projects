@@ -4,7 +4,6 @@ import re
 
 from allowed_characters import filteredInKanji
 from allowed_characters import katakana_characters
-from allowed_characters import jlpt_n1_characters
 from allowed_characters import kana_characters
 from allowed_characters import latin_characters
 from allowed_characters import jouyou_kanji
@@ -24,20 +23,20 @@ def filter_sentences(ja_sentence, en_sentence):
     ja_sentence = ja_sentence.replace(" ", "")
     print(ja_sentence)
 
-    # remove sentences starting with particles
+    # remove sentences with bad delimiting　- only for aozora
     if ja_sentence[0] == "と" or ja_sentence[0] == "が":
         return False
 
     # remove characters not taught by Kanji asap
     for character in ja_sentence:
         if character not in kana_characters + latin_characters + jouyou_kanji \
-                + jlpt_n1_characters + numerical_digits + symbols_n_signs:
+                + filteredInKanji + numerical_digits + symbols_n_signs:
             print("{} is out of scope".format(character))
             return False
 
     # remove too short or too long
     print('ja sentence len is {}'.format(len(ja_sentence)))
-    if not 5 <= len(ja_sentence) <= 32:
+    if not 6 <= len(ja_sentence) <= 32:
         print("sentence length is not appropriate".format(ja_sentence))
         return
 
