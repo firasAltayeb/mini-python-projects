@@ -19,7 +19,7 @@ def filter_sentences(ja_sentence, en_sentence):
         return False
 
     # remove furigana with containing brackets
-    ja_sentence = re.sub("[\(\（\[\「].*?[\)\）\]\」]", "", ja_sentence)
+    ja_sentence = re.sub("[\[].*?[\]]", "", ja_sentence)
     ja_sentence = ja_sentence.replace(" ", "")
     print(ja_sentence)
 
