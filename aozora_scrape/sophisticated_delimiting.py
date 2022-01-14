@@ -16,20 +16,20 @@ def reverse_check(sentence):
     stack = []
     new_sentence = ""
     print("checking reverse balance for {}".format(sentence))
-    for i in sentence[::-1]:
-        if i not in open_list + close_list:
-            new_sentence = i + new_sentence
-        if i in close_list:
-            stack.append(i)
-            new_sentence = i + new_sentence
-        elif i in open_list:
-            pos = open_list.index(i)
+    for chara in sentence[::-1]:
+        if chara not in open_list + close_list:
+            new_sentence = chara + new_sentence
+        if chara in close_list:
+            stack.append(chara)
+            new_sentence = chara + new_sentence
+        elif chara in open_list:
+            pos = open_list.index(chara)
             if ((len(stack) > 0) and
                     (close_list[pos] == stack[len(stack) - 1])):
                 stack.pop()
-                new_sentence = i + new_sentence
+                new_sentence = chara + new_sentence
             else:
-                print("Remove bracket ", i)
+                print("Excluding bracket at index ", sentence.find(chara))
     # check if after exclusion duplicates arise
     if len(stack) == 0 and new_sentence not in balanced_sentence_set:
         balanced_sentence_set.add(new_sentence)
@@ -40,22 +40,23 @@ def check_balance(sentence):
     stack = []
     new_sentence = ""
     print("check balance for {}".format(sentence))
-    for i in sentence:
-        if i not in open_list + close_list:
-            new_sentence += i
-        if i in open_list:
-            stack.append(i)
-            new_sentence += i
-        elif i in close_list:
-            pos = close_list.index(i)
+    for chara in sentence:
+        if chara not in open_list + close_list:
+            new_sentence += chara
+        if chara in open_list:
+            stack.append(chara)
+            new_sentence += chara
+        elif chara in close_list:
+            pos = close_list.index(chara)
             if ((len(stack) > 0) and
                     (open_list[pos] == stack[len(stack) - 1])):
                 stack.pop()
-                new_sentence += i
+                new_sentence += chara
             else:
-                print("Remove bracket ", i)
+                print("Excluding bracket at index ", sentence.find(chara))
     # check if after exclusion duplicates arise
-    if len(stack) == 0 and new_sentence not in balanced_sentence_set:
+    if len(stack) == 0 and new_sentence \
+            not in balanced_sentence_set:
         balanced_sentence_set.add(new_sentence)
         log_sentence(new_sentence)
     else:
