@@ -12,7 +12,7 @@ def log_sentence(sentence):
         new_file.write(sentence + "\n")
 
 
-def reverse_balance(sentence):
+def reverse_check(sentence):
     stack = []
     new_sentence = ""
     print("checking reverse balance for {}".format(sentence))
@@ -29,7 +29,7 @@ def reverse_balance(sentence):
                 stack.pop()
                 new_sentence = i + new_sentence
             else:
-                print("Excluding ", i)
+                print("Remove bracket ", i)
     # check if after exclusion duplicates arise
     if len(stack) == 0 and new_sentence not in balanced_sentence_set:
         balanced_sentence_set.add(new_sentence)
@@ -53,14 +53,13 @@ def check_balance(sentence):
                 stack.pop()
                 new_sentence += i
             else:
-                print("Excluding ", i)
-    # log sentence with removed awkward sentences
+                print("Remove bracket ", i)
     # check if after exclusion duplicates arise
     if len(stack) == 0 and new_sentence not in balanced_sentence_set:
         balanced_sentence_set.add(new_sentence)
         log_sentence(new_sentence)
     else:
-        reverse_balance(new_sentence)
+        reverse_check(new_sentence)
 
 
 def concurrent_run(sens):
@@ -90,17 +89,10 @@ def main():
         .replace("………", "…").replace("……", "…").replace("…", "…\n")
     sentences = body_text.split('\n')
 
-    seen_set = set()
-    # check if after delimiting duplicates arise
-    for delimited_line in sentences:
-        # print("filtering duplicates")
-        if delimited_line not in seen_set:
-            seen_set.add(delimited_line)
-
     t0 = time.time()
-    concurrent_run(seen_set)
+    concurrent_run(sentences)
     t1 = time.time()
-    print(f"{t1 - t0} seconds to analyse {len(seen_set)} stories.")
+    print(f"{t1 - t0} seconds to analyse {len(sentences)} stories.")
 
 
 main()
