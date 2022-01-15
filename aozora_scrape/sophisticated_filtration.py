@@ -18,8 +18,8 @@ def filter_sentences(ja_sentence, en_sentence):
     if sum(c in katakana_characters for c in ja_sentence) != 0:
         return False
 
-    # remove furigana with containing brackets
-    ja_sentence = re.sub("[\[].*?[\]]", "", ja_sentence)
+    # remove furigana with containing brackets - only for aozora
+    ja_sentence = re.sub("[\[\（].*?[\]\）]", "", ja_sentence)
     ja_sentence = ja_sentence.replace(" ", "")
     print(ja_sentence)
 
