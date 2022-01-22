@@ -23,7 +23,7 @@ def filter_sentences(ja_sentence, en_sentence):
             or ja_sentence[0] == "を":
         return False
 
-    # remove furigana with containing brackets
+    # remove furigana with containing brackets - only for aozora
     ja_sentence = re.sub("[\[].*?[\]]", "", ja_sentence)
     ja_sentence = ja_sentence.replace(" ", "")
     print(ja_sentence)
