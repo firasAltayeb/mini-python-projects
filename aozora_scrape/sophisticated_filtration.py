@@ -18,14 +18,15 @@ def filter_sentences(ja_sentence, en_sentence):
     if sum(c in katakana_characters for c in ja_sentence) != 0:
         return False
 
+    # remove sentences with bad delimiting　- only for aozora
+    if ja_sentence[0] == "と" or ja_sentence[0] == "が" \
+            or ja_sentence[0] == "を":
+        return False
+
     # remove furigana with containing brackets
     ja_sentence = re.sub("[\[].*?[\]]", "", ja_sentence)
     ja_sentence = ja_sentence.replace(" ", "")
     print(ja_sentence)
-
-    # remove sentences with bad delimiting　- only for aozora
-    if ja_sentence[0] == "と" or ja_sentence[0] == "が":
-        return False
 
     # remove characters not taught by Kanji asap
     for character in ja_sentence:
