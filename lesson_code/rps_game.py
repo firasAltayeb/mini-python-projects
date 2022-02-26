@@ -2,6 +2,19 @@ import random
 
 possible_actions = ["rock", "paper", "scissors"]
 
+
+def to_play_again(play_again):
+    low_play_again = play_again.lower()
+    if low_play_again == "y" or low_play_again == "yes":
+        return True
+    elif low_play_again == "n" or low_play_again == "no":
+        return False
+    else:
+        print(f"{play_again} is not an option")
+        again_play = input("Play again? (y/n): ")
+        return to_play_again(again_play)
+
+
 while True:
     user_action = input("Enter a choice (rock, paper, scissors): ")
     computer_action = random.choice(possible_actions)
@@ -26,5 +39,5 @@ while True:
             print("Rock smashes scissors! You lose.")
 
     play_again = input("Play again? (y/n): ")
-    if play_again.lower() != "y":
+    if not to_play_again(play_again):
         break
