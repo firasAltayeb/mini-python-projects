@@ -1,5 +1,5 @@
 def convert(seconds):
-    day = seconds // 86400  # number of seconds in day
+    day = seconds // 86400  # number of seconds in a day
     # remainder of dividing the left hand by right hand
     seconds = seconds % (24 * 3600)  # 86400
     print(f"seconds {seconds}")
@@ -14,5 +14,5 @@ def convert(seconds):
 
 
 # Driver program
-seconds_to_convert = 86399
+seconds_to_convert = 99999
 convert(seconds_to_convert)
