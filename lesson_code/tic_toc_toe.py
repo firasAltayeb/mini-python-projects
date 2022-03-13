@@ -3,7 +3,7 @@ gameBoard = {'1': ' ', '2': ' ', '3': ' ',
              '7': ' ', '8': ' ', '9': ' '}
 
 
-def printBoard(dic):
+def print_board(dic):
     print(dic['1'] + '|' + dic['2'] + '|' + dic['3'])
     print('-+-+-')
     print(dic['4'] + '|' + dic['5'] + '|' + dic['6'])
@@ -17,7 +17,7 @@ def game():
     winner_found = False
 
     while count < 9:
-        printBoard(gameBoard)
+        print_board(gameBoard)
         print("It's your turn," + turn + ".Move to which place?")
 
         move = input()
@@ -31,44 +31,44 @@ def game():
 
         if count >= 5:
             if gameBoard['1'] == gameBoard['2'] == gameBoard['3'] != ' ':
-                printBoard(gameBoard)
+                print_board(gameBoard)
                 winner_found = True
-                print(" **** " + turn + " won. ****")
+                print(f" **** {turn} won. ****")
                 break
             elif gameBoard['4'] == gameBoard['5'] == gameBoard['6'] != ' ':
-                printBoard(gameBoard)
+                print_board(gameBoard)
                 winner_found = True
-                print(" **** " + turn + " won. ****")
+                print(f" **** {turn} won. ****")
                 break
             elif gameBoard['7'] == gameBoard['8'] == gameBoard['9'] != ' ':
-                printBoard(gameBoard)
+                print_board(gameBoard)
                 winner_found = True
-                print(" **** " + turn + " won. ****")
+                print(f" **** {turn} won. ****")
                 break
             elif gameBoard['1'] == gameBoard['5'] == gameBoard['9'] != ' ':
-                printBoard(gameBoard)
+                print_board(gameBoard)
                 winner_found = True
-                print(" **** " + turn + " won. ****")
+                print(f" **** {turn} won. ****")
                 break
             elif gameBoard['3'] == gameBoard['5'] == gameBoard['7'] != ' ':
-                printBoard(gameBoard)
+                print_board(gameBoard)
                 winner_found = True
-                print(" **** " + turn + " won. ****")
+                print(f" **** {turn} won. ****")
                 break
             elif gameBoard['1'] == gameBoard['4'] == gameBoard['7'] != ' ':
-                printBoard(gameBoard)
+                print_board(gameBoard)
                 winner_found = True
-                print(" **** " + turn + " won. ****")
+                print(f" **** {turn} won. ****")
                 break
             elif gameBoard['2'] == gameBoard['5'] == gameBoard['8'] != ' ':
-                printBoard(gameBoard)
+                print_board(gameBoard)
                 winner_found = True
-                print(" **** " + turn + " won. ****")
+                print(f" **** {turn} won. ****")
                 break
             elif gameBoard['3'] == gameBoard['6'] == gameBoard['9'] != ' ':
-                printBoard(gameBoard)
+                print_board(gameBoard)
                 winner_found = True
-                print(" **** " + turn + " won. ****")
+                print(f" **** {turn} won. ****")
                 break
 
         if turn == 'X':
