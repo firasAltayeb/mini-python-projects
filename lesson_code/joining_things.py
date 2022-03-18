@@ -23,9 +23,3 @@ for index in range(len(dog_breeds)):
     values += dog_breeds[index] + ' '
 
 print(values)
-
-first_index_values = []
-for value in dog_breeds:
-    first_index_values.append(values.index(value))
-
-print(first_index_values)
