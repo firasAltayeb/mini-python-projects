@@ -11,6 +11,16 @@ def print_board(dic):
     print(dic['7'] + '|' + dic['8'] + '|' + dic['9'])
 
 
+def check_validity(choice):
+    try:
+        if 1 <= int(choice) <= 9:
+            return True
+        else:
+            return False
+    except:
+        return False
+
+
 def game():
     turn = 'X'
     count = 0
@@ -18,9 +28,11 @@ def game():
 
     while count < 9:
         print_board(gameBoard)
-        print("It's your turn," + turn + ".Move to which place?")
+        print(f"It's {turn} turn. Move to which place?")
 
         move = input()
+        while check_validity(move) is False:
+            move = input(f"{move}'s is not a valid input. Please choose a number between 1-9:\n")
 
         if gameBoard[move] == ' ':
             gameBoard[move] = turn
@@ -79,8 +91,8 @@ def game():
     if count == 9 and winner_found is not True:
         print("It's a Tie!!")
 
-    restart = input("Do want to play Again?(y/n)")
-    if restart == "y" or restart == "Y":
+    restart = input("Do want to play Again?(y/n):\n")
+    if restart.casefold == "y".casefold:
         for key in gameBoard:
             gameBoard[key] = " "
 
