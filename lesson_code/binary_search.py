@@ -1,15 +1,15 @@
-def findValue(numbers, low, high, number_to_find):
+def findValue(num, low, high, num_to_find):
     if low <= high:
         middle = low + (high - low) // 2
 
-        if numbers[middle] == number_to_find:
+        if num[middle] == num_to_find:
             return middle
-        elif numbers[middle] < number_to_find:
+        elif num[middle] < num_to_find:
             low = middle + 1
-            return findValue(numbers, low, high, number_to_find)
+            return findValue(num, low, high, num_to_find)
         else:
             high = middle - 1
-            return findValue(numbers, low, high, number_to_find)
+            return findValue(num, low, high, num_to_find)
     else:
         return -1
 
