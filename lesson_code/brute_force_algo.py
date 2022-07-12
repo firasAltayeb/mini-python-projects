@@ -1,15 +1,18 @@
 possible_keys = "ab"
-password_length = 2
+password_length = 3
 list_of_possibilities = []
 
-for w in range(password_length):
+for j in range(password_length):
+    # reverts possibility to original state
     possibility = [i for i in possible_keys]
-    print("w cycle: {}".format(w))
-    for y in range(w):
-        print("y cycle: {}".format(y))
-        possibility = [x + i for x in possibility for i in possible_keys]
-        # print(possibility)
+    print("j cycle #{}".format(j))
+    j == 0 and print("possibility is now {}".format(possibility))
+    for k in range(j):
+        print("k cycle #{}".format(k))
+        possibility = [x + y for x in possibility for y in possible_keys]
+        print("possibility is now {}".format(possibility))
     list_of_possibilities.append(possibility)
+    print("above possibility is added to the list_of_possibilities")
 
 print(list_of_possibilities)
 
