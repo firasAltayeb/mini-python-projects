@@ -1,23 +1,24 @@
-def findValue(num, low, high, num_to_find):
+def findValue(col, low, high, num_to_find):
     if low <= high:
         middle = low + (high - low) // 2
 
-        if num[middle] == num_to_find:
+        if col[middle] == num_to_find:
             return middle
-        elif num[middle] < num_to_find:
+        elif col[middle] < num_to_find:
             low = middle + 1
-            return findValue(num, low, high, num_to_find)
+            return findValue(col, low, high, num_to_find)
         else:
             high = middle - 1
-            return findValue(num, low, high, num_to_find)
+            return findValue(col, low, high, num_to_find)
     else:
         return -1
 
 
-numbers = [7, 9, 14, 22, 34]
+lowest_index = 0
 number_to_find = 22
+collection = [7, 9, 14, 22, 34]
 
-result_index = findValue(numbers, 0, len(numbers) - 1, number_to_find)
+result_index = findValue(collection, lowest_index, len(collection) - 1, number_to_find)
 
 if result_index == -1:
     print("This item was not found in the list")
