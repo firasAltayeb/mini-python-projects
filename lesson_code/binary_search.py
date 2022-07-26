@@ -2,7 +2,7 @@
 # def print_msg(arg):
 #     print(f"The arg {arg} is printed with print msg")
 
-def findValue(col, low, high, num_to_find):
+'''def findValue(col, low, high, num_to_find):
     if low <= high:
         middle = low + (high - low) // 2
 
@@ -15,7 +15,22 @@ def findValue(col, low, high, num_to_find):
             high = middle - 1
             return findValue(col, low, high, num_to_find)
     else:
-        return -1
+        return -1'''
+
+def findValue(col,low,high,num_to_find):
+    while low <= high:
+        middle = (low + high)//2
+
+        if col[middle] == num_to_find:
+            return middle
+
+        elif col[middle] < num_to_find:
+            low = middle + 1
+            return findValue(col, low, high, num_to_find)
+
+        else:
+            high = middle - 1
+    return -1
 
 
 lowest_index = 0
