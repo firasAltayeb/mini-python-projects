@@ -1,3 +1,7 @@
+# used to text debug tool functionality
+# def print_msg(arg):
+#     print(f"The arg {arg} is printed with print msg")
+
 def findValue(col, low, high, num_to_find):
     if low <= high:
         middle = low + (high - low) // 2
@@ -17,6 +21,8 @@ def findValue(col, low, high, num_to_find):
 lowest_index = 0
 number_to_find = 22
 collection = [7, 9, 14, 22, 34]
+
+# print_msg(number_to_find)
 
 result_index = findValue(collection, lowest_index, len(collection) - 1, number_to_find)
 
