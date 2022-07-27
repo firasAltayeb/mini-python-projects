@@ -26,7 +26,6 @@ def findValue(col,low,high,num_to_find):
 
         elif col[middle] < num_to_find:
             low = middle + 1
-            return findValue(col, low, high, num_to_find)
 
         else:
             high = middle - 1
