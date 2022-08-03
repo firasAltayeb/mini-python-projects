@@ -1,9 +1,9 @@
 import random
 
 
-# used to text debug tool functionality
+# used to learn/test debug tool functionality
 def print_msg(num):
-    print(f"num is {num} - sprint_msg")
+    print(f"num is {num} - printed with user-function")
 
 
 def find_value(col, low, high, num_to_find):
