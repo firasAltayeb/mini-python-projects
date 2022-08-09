@@ -8,8 +8,8 @@ def print_msg(num):
 
 def find_value(col, low, high, num_to_find):
     # if low <= high:
-    while low <= high:
-        middle = (low + high)//2
+    while low <= high:  # 0 (log n)
+        middle = (low + high) // 2
 
         if col[middle] == num_to_find:
             return middle

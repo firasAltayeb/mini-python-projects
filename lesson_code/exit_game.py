@@ -15,7 +15,8 @@ while exit_choice.casefold() != correct_exit:
     if attempt_counter >= 3:
         hint_choice = input("Would you like a hint: ")
         if hint_choice.casefold() == 'yes':
-            print(f"Opposite direction of {opposite_exit[correct_exit]}")
+            print(f"The exit starts with {correct_exit[0]}")
+            # print(f"Opposite direction of {opposite_exit[correct_exit]}")
 
     exit_choice = input("Please choose an exit: ")
     # Code below changes the exit everytime to increase difficulty
