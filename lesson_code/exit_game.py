@@ -11,12 +11,31 @@ exit_choice = ""
 
 print("You are stuck in a haunted house with one exit. If you don't escape, you're in big trouble.")
 
+
+def print_opposite():
+    print(f"Opposite direction of {opposite_exit[correct_exit]}")
+
+
+def print_first_letter():
+    print(f"The exit starts with {correct_exit[0]}")
+
+
+def print_cardinal():
+    if correct_exit in all_exits[:4]:
+        print(f"The exit is in one of the four cardinal directions")
+    else:
+        print(f"The exit is in a body relative direction")
+
+
+hint_list = [print_opposite, print_first_letter]
+
 while exit_choice.casefold() != correct_exit:
     if attempt_counter >= 3:
         hint_choice = input("Would you like a hint: ")
         if hint_choice.casefold() == 'yes':
-            print(f"The exit starts with {correct_exit[0]}")
-            # print(f"Opposite direction of {opposite_exit[correct_exit]}")
+            print_cardinal()
+            # random.choice(hint_list)()
+            attempt_counter = 0
 
     exit_choice = input("Please choose an exit: ")
     # Code below changes the exit everytime to increase difficulty
