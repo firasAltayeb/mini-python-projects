@@ -20,6 +20,10 @@ def print_first_letter():
     print(f"The exit starts with {correct_exit[0]}")
 
 
+def print_backwards():
+    print(f"{correct_exit[::-1]} backwards")
+
+
 def print_cardinal():
     if correct_exit in all_exits[:4]:
         print(f"The exit is in one of the four cardinal directions")
@@ -27,14 +31,15 @@ def print_cardinal():
         print(f"The exit is in a body relative direction")
 
 
-hint_list = [print_opposite, print_first_letter]
+hint_list = [print_opposite, print_first_letter, print_cardinal, print_backwards]
 
 while exit_choice.casefold() != correct_exit:
-    if attempt_counter >= 3:
+    if attempt_counter >= 3 and hint_list:
         hint_choice = input("Would you like a hint: ")
         if hint_choice.casefold() == 'yes':
-            print_cardinal()
-            # random.choice(hint_list)()
+            hint_function = random.choice(hint_list)
+            hint_function()
+            hint_list.remove(hint_function)
             attempt_counter = 0
 
     exit_choice = input("Please choose an exit: ")
