@@ -7,11 +7,12 @@ import json
 gameBoard = set({})
 print(type(gameBoard))
 
-gameBoard = {}
-print(type(gameBoard))
+# gameBoard = {}
+# for i in range(9):
+#     gameBoard[str(i)] = ''
 
-for i in range(9):
-    gameBoard[str(i)] = ''
+gameBoard = {i: '' for i in range(9)}
+print(type(gameBoard))
 
 # for i in range(9):
 #     with open('example.json', 'a+') as new_file:
@@ -26,3 +27,7 @@ for i in range(9):
 
 with open('example.json', 'a+') as new_file:
     json.dump(gameBoard, new_file)
+
+my_list = [1, 2, 3]
+print([elem if elem % 2 > 0 else " " for elem in my_list])
+print([elem for elem in my_list if elem % 2 > 0])
