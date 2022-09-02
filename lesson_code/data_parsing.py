@@ -27,7 +27,3 @@ print(type(gameBoard))
 
 with open('example.json', 'a+') as new_file:
     json.dump(gameBoard, new_file)
-
-my_list = [1, 2, 3]
-print([elem if elem % 2 > 0 else " " for elem in my_list])
-print([elem for elem in my_list if elem % 2 > 0])
