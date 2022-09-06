@@ -14,16 +14,20 @@ print(type(gameBoard))
 gameBoard = {i: '' for i in range(9)}
 print(type(gameBoard))
 
-# for i in range(9):
-#     with open('example.json', 'a+') as new_file:
-#         if i == 0:
-#             new_file.write('{\n')
-#             new_file.write(f'\"{i}\":\"\",\n')
-#         elif i != 0 and i != 8:
-#             new_file.write(f'\"{i}\":\"\",\n')
-#         elif i == 8:
-#             new_file.write(f'\"{i}\":\"\"\n')
-#             new_file.write('}')
+for i in range(9):
+    with open('example.json', 'a+') as new_file:
+        if i == 0:
+            new_file.write('{\n')
+            new_file.write(f'\"{i}\":\"\",\n')
+        elif i != 0 and i != 8:
+            new_file.write(f'\"{i}\":\"\",\n')
+        elif i == 8:
+            new_file.write(f'\"{i}\":\"\"\n')
+            new_file.write('}')
+
+file = open('file.txt', 'w')
+print(gameBoard, file=file)
+file.close()  # Close file
 
 # w Truncate file to zero length & open for writing (file created)
 # w+ Truncate file to zero length & open for writing & reading (file created)
