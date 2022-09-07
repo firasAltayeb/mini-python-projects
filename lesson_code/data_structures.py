@@ -19,8 +19,9 @@ list_a.append(5)
 print(list_a)
 
 # AttributeError: 'tuple' object has no attribute 'append'
-# tuple_a = (1,2,3,4)
+tuple_a = (1, 2, 3, 4)
 # tuple_a.append(5)
+print(tuple_a)
 
 # <class 'dict'>
 a = {}
