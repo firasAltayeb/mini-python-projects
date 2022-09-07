@@ -8,11 +8,10 @@ import json
 # for i in range(9):
 #     gameBoard[str(i)] = ''
 
-gameBoard = {i: '' for i in range(9)}
-print(type(gameBoard))
+gameBoard = {i: 'meow' for i in range(9)}
 
 # for i in range(9):
-#     with open('example.json', 'w') as new_file:
+#     with open('example.json', 'a') as new_file:
 #         if i == 0:
 #             new_file.write('{\n')
 #             new_file.write(f'\"{i}\":\"\",\n')
@@ -22,7 +21,17 @@ print(type(gameBoard))
 #             new_file.write(f'\"{i}\":\"\"\n')
 #             new_file.write('}')
 
-with open('example.json', 'w') as new_file:
-    json.dump(gameBoard, new_file)
+with open('example.json', 'a+') as file:
+    json.dump(gameBoard, file)
+    file.seek(0)
+    print(file.read())
+
+with open('example.json', 'w+') as file:
+    json.dump(gameBoard, file)
+    file.seek(0)
+    data = json.load(file)
+    print(data["0"])
+
+
 
 
