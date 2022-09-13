@@ -31,7 +31,3 @@ with open('example.json', 'w+') as file:
     file.seek(0)
     data = json.load(file)
     print(data["0"])
-
-
-
-
