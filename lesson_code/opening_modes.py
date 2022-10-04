@@ -2,7 +2,7 @@ message_one = " Hello world "
 message_two = " Hi there Josh "
 
 # file = open('file.txt', 'a')
-# print(message, file=file)
+# print(message_one, file=file)
 # file.close()
 
 # a Open for writing at end (file created)
@@ -15,7 +15,7 @@ with open('file.txt', 'a+') as file:
     file.seek(0)
     print(file.read())
 
-# r Open for writing at start (file not created)
+# r Open for reading at start (file not created)
 with open('file.txt', 'r') as file:
     print(file.read())
 

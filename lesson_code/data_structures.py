@@ -13,7 +13,7 @@ print(list_a[:2])
 # TypeError: 'set' object is not subscriptable
 set_a = set(text)
 set_a.add(3)
-print(set_a[:2])
+# print(set_a[:2])
 
 # [1,2,3,4,5]
 list_a.append(5)
