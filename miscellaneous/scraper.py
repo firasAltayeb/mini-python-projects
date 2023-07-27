@@ -15,14 +15,13 @@ sub_pages = []
 def parse_main_page():
     # soup = BeautifulSoup(driver.get(URL).page_source, 'html.parser')
     response = requests.get(URL, timeout=5)
-
     soup = BeautifulSoup(response.text, 'html.parser')
 
     # for element in soup.find_all(id="ResultsContainer"):
     for element in soup.find_all(attrs={'class': 'mini-list-item'}):
         page_extension = element.find('a')['href']
         if page_extension is not None:
-            # gather_dependencies(URL + page_extension)
+            gather_dependencies(URL + page_extension)
             sub_pages.append(URL + page_extension)
 
     # threads = min(MAX_THREADS, len(sub_pages))
