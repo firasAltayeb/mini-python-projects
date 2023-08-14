@@ -10,24 +10,28 @@ sub_pages = []
 
 
 # used when dealing with webpages that need JS to load
-# DRIVER = webdriver.Safari()
+DRIVER = webdriver.Safari()
+
 
 def parse_main_page():
-    # soup = BeautifulSoup(driver.get(URL).page_source, 'html.parser')
-    response = requests.get(URL, timeout=5)
-    soup = BeautifulSoup(response.text, 'html.parser')
+    DRIVER.get(URL)
+    time.sleep(1)
+
+    soup = BeautifulSoup(DRIVER.page_source, 'html.parser')
+    # response = requests.get(URL, timeout=5)
+    # soup = BeautifulSoup(response.text, 'html.parser')
 
     # for element in soup.find_all(id="ResultsContainer"):
     for element in soup.find_all(attrs={'class': 'mini-list-item'}):
         page_extension = element.find('a')['href']
         if page_extension is not None:
-            gather_dependencies(URL + page_extension)
+            # gather_dependencies(URL + page_extension)
             sub_pages.append(URL + page_extension)
 
-    # threads = min(MAX_THREADS, len(sub_pages))
-    #
-    # with concurrent.futures.ThreadPoolExecutor(max_workers=threads) as executor:
-    #     executor.map(gather_dependencies, sub_pages)
+    threads = min(MAX_THREADS, len(sub_pages))
+
+    with concurrent.futures.ThreadPoolExecutor(max_workers=threads) as executor:
+        executor.map(gather_dependencies, sub_pages)
 
 
 def gather_dependencies(url):
