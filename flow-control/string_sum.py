@@ -8,4 +8,5 @@ print(separators)
 
 values = "".join(char if char not in separators
                  else " " for char in number).split()
+
 print(sum([int(val) for val in values]))

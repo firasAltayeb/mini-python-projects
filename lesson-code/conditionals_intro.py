@@ -1,3 +1,10 @@
+name = input('please enter your name: ')
+# if name:
+if name != '':
+    print('Hello, {}'.format(name))
+else:
+    print('do you have no name')
+
 age = int(input("how old are you? \n"))
 
 # if 16 <= age <= 65:
