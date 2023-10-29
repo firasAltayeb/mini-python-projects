@@ -8,29 +8,29 @@
 #  2. LONG_INTEGER n
 #
 
-def repeatedString(s, n):
-    infinite_s = ''
-    char_counter = 0
-    num_of_a_in_s = 0
+def repeated_string(s, n):
+    multiplier = n // len(s)
+    remainder_s = s[:n % len(s)]
 
-    while len(infinite_s) < n:
-        s_to_add = ''
-        if len(infinite_s + s) > n:
-            overflow_n = len(infinite_s + s) - n
-            s_to_add = s[:-overflow_n]
-            infinite_s += s_to_add
-            for character in s_to_add:
-                if character == 'a':
-                    char_counter += 1
-        else:
-            infinite_s += s
-            if num_of_a_in_s == 0:
-                for character in s:
-                    if character == 'a':
-                        num_of_a_in_s += 1
-            char_counter += num_of_a_in_s
+    print(multiplier)
+    print(remainder_s)
 
-    return char_counter
+    return s.count("a") * multiplier + remainder_s.count("a")
+
+    # char_counter = 0
+    # infinite_s = s * n
+    #
+    # if len(infinite_s) > n:
+    #     overflow_n = len(infinite_s) - n
+    #     infinite_s = infinite_s[:-overflow_n]
+    #
+    # for character in infinite_s:
+    #     if character == 'a':
+    #         char_counter += 1
+    #
+    # print(infinite_s)
+    #
+    # return char_counter
 
 
 if __name__ == '__main__':
@@ -40,6 +40,6 @@ if __name__ == '__main__':
     # n = int(input().strip())
     n = 10
 
-    result = repeatedString(s, n)
+    result = repeated_string(s, n)
 
     print(result)
