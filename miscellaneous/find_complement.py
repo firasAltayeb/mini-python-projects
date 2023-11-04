@@ -1,5 +1,11 @@
 import random
 
+#
+# Given an array of integer nums and an integer target,
+# return indices of two numbers such that they add up
+# to target
+#
+
 target = 8
 nums = [random.randint(0, 9) for _ in range(5)]
 

@@ -8,14 +8,17 @@ def minimum_swaps(arr):
     print(f'ref_arr is {ref_arr}')
     index_dict = {v: i for i, v in enumerate(arr)}
     swaps = 0
-
+    print(f'initial arr: {arr}')
+    print(f'initial index_dict: {index_dict}')
     for i, v in enumerate(arr):
         correct_value = ref_arr[i]
         if v != correct_value:
-            to_swap_ix = index_dict[correct_value]
-            arr[to_swap_ix], arr[i] = arr[i], arr[to_swap_ix]
-            index_dict[v] = to_swap_ix
+            to_swap_idx = index_dict[correct_value]
+            arr[to_swap_idx], arr[i] = arr[i], arr[to_swap_idx]
+            print(f'arr: {arr}')
+            index_dict[v] = to_swap_idx
             index_dict[correct_value] = i
+            print(f'index_dict: {index_dict}')
             swaps += 1
 
     return swaps
