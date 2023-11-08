@@ -7,7 +7,7 @@
 #  2. STRING path
 #
 
-def counting_valleys(steps, path):
+def counting_valleys(path):
     # descending = False
     valley_count = 0
     sea_level = 0
@@ -23,13 +23,10 @@ def counting_valleys(steps, path):
 
 
 if __name__ == '__main__':
-    # steps = int(input().strip())
-    steps = 8
-
     # path = input()
     path = 'UDDDUDUU'
 
-    result = counting_valleys(steps, path)
+    result = counting_valleys(path)
 
     # Expected Output 1
     print(result)

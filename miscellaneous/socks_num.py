@@ -7,7 +7,7 @@
 #  2. INTEGER_ARRAY ar
 #
 
-def sock_counter(n, ar):
+def sock_counter(ar):
     socks_dic = {}
     pairs = 0
 
@@ -34,7 +34,7 @@ if __name__ == '__main__':
     # ar = list(map(int, input().rstrip().split()))
     ar = [10, 20, 20, 10, 10, 30, 50, 10, 20]
 
-    result = sock_counter(n, ar)
+    result = sock_counter(ar)
 
     # Expected Output 3
     print(str(result) + '\n')

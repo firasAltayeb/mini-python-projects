@@ -8,6 +8,7 @@ sample_text = state_union.raw("1984.txt")
 custom_sent_tokenizer = PunktSentenceTokenizer(train_text)
 tokenized = custom_sent_tokenizer.tokenize(sample_text)
 
+
 def process_content():
     try:
         for i in tokenized[:5]:
