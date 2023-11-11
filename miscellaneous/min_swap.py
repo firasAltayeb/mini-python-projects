@@ -3,6 +3,7 @@
 #
 # Returns minimum number of swaps to sort the array
 #
+
 def minimum_swaps(arr):
     ref_arr = sorted(arr)
     print(f'ref_arr is {ref_arr}')

@@ -1,7 +1,7 @@
 #
 # Complete the 'makeAnagram' function below.
 #
-# The function is expected to return an INTEGER.
+# The function is expected to return min deletion count to anagram
 # The function accepts following parameters:
 #  1. STRING a
 #  2. STRING b
@@ -40,5 +40,5 @@ if __name__ == '__main__':
 
     result = make_anagram(a, b)
 
-    # Expected Output 4
+    # Expected Output 30
     print(str(result) + '\n')

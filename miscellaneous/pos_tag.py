@@ -8,6 +8,8 @@ from typing import List
 from nltk.metrics.scores import precision, recall, f_measure, accuracy
 
 import numpy as np
+
+
 # import re
 
 def _divider(line: str) -> bool:
@@ -17,6 +19,7 @@ def _divider(line: str) -> bool:
     else:
         return False
 
+
 def read_conll(conll_input):
     for is_divider, lines in itertools.groupby(conll_input, _divider):
         if not is_divider:
@@ -25,6 +28,7 @@ def read_conll(conll_input):
             tokens, pos_tags, _ = fields
 
             yield tokens, pos_tags
+
 
 def kfold_split(sentences: List, fold: int = 10):
     sents_indx = list(range(0, len(sentences)))
@@ -37,6 +41,7 @@ def kfold_split(sentences: List, fold: int = 10):
         indx_split[i] = sents_indx[b_idx:e_idx]
     return indx_split
 
+
 def crossval_eval(split_sents: List[List], fold: int = 10):
     for i, fold_th in enumerate(split_sents):
         ts_idx = fold_th
@@ -46,11 +51,12 @@ def crossval_eval(split_sents: List[List], fold: int = 10):
                 tr_idx.extend(split_sents[tr_])
         yield tr_idx, ts_idx
 
+
 def train_memorization(train_sents: List, train_tags: List):
     word_tag_dict = {}
     for sent, tags in zip(train_sents, train_tags):
         for word, tag in zip(sent, tags):
-            if not(word in word_tag_dict):
+            if not (word in word_tag_dict):
                 # first word and tag pairs found
                 word_tag_dict[word] = Counter({tag: 1})
             else:
@@ -58,11 +64,13 @@ def train_memorization(train_sents: List, train_tags: List):
                 word_tag_dict[word][tag] += 1
     return word_tag_dict
 
+
 def predict(word: str, word_tag_: dict, common_tag='NN'):
     if word in word_tag_:
         return word_tag_[word].most_common(1)[0][0]
     else:
         return common_tag
+
 
 def summarize_data(sents_list, index, output_file, delimiter=' '):
     tok_tag_dict = Counter()
@@ -78,12 +86,12 @@ def summarize_data(sents_list, index, output_file, delimiter=' '):
             print(f'{tok}{delimiter}{pos}', file=output_file)
         print('', file=output_file)
 
-
     print(f'sentences : {len(index)}')
     print(f'word types: {len(tok_counter)}')
 
     for tag, counts in tag_counter.most_common(5):
         print(f'{tag} with counts : {counts}')
+
 
 def evaluate(sents_list, test, train_dict, output_file, delimiter=' '):
     gold_tags, gold_set = [], []
@@ -111,7 +119,7 @@ def evaluate(sents_list, test, train_dict, output_file, delimiter=' '):
                     pred_per_tags[pos] = [(tok, hyp, idx, test_idx)]
                 elif hyp in pred_per_tags:
                     pred_per_tags[pos].append(((tok, hyp, idx, test_idx)))
-            
+
             gold_set.append((tok, pos, idx, test_idx))
 
             # out_delim = called_args.output_delimiter
@@ -140,6 +148,7 @@ def evaluate(sents_list, test, train_dict, output_file, delimiter=' '):
         print(f'{label} precision : {precision(c_gold_set, c_pred_set)}')
         print(f'{label} recall : {recall(c_gold_set, c_pred_set)}')
         print(f'{label} f_measure : {f_measure(c_gold_set, c_pred_set)}')
+
 
 def main(called_args):
     conll_data = open(called_args.conll_input, 'r', encoding='ascii')
@@ -171,6 +180,7 @@ def main(called_args):
         # print('Confusion matrix:')
         # print(ConfusionMatrix(gold_tags, pred_tags, sort_by_count=True))
         # print(ConfusionMatrix(gold_tags, pred_tags).pretty_format(sort_by_count=True))
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(

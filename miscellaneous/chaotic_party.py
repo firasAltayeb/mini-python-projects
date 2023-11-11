@@ -3,6 +3,7 @@
 #
 # The function accepts INTEGER_ARRAY q as parameter.
 #
+
 def minimum_bribes(q):
     total_bribes = 0
     expected_first = 1
