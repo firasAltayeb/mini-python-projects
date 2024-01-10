@@ -4,7 +4,7 @@
 # nums are not important as well as the size of nums.
 #
 
-def removeDuplicates(nums):
+def remove_duplicates(nums):
     l = 1
 
     for r in range(1, len(nums)):
@@ -18,6 +18,6 @@ def removeDuplicates(nums):
 if __name__ == '__main__':
     arr = [1, 1, 2]
 
-    result = removeDuplicates(arr)
+    result = remove_duplicates(arr)
 
     print(str(result))

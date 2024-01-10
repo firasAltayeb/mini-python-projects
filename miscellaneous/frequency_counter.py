@@ -1,12 +1,10 @@
-from collections import Counter
-
-
 #
 # Complete the 'isValid' function below.
 #
 # The function is expected to return a STRING.
 # The function accepts STRING s as parameter.
 #
+from collections import Counter
 
 
 def is_valid_old(s):

@@ -1,11 +1,10 @@
-import random
-
-
 #
 # Given an array of integer nums and an integer target,
 # return indices of two numbers such that they add up
 # to target
 #
+import random
+
 
 def find_complement_slow(nums, t):
     for i in range(len(nums)):

@@ -1,7 +1,6 @@
+# Return the minimum integer k such that all the bananas can be eaten within h hours.
 import math
 
-
-# Return the minimum integer k such that all the bananas can be eaten within h hours.
 
 def min_eating_speed(piles, h):
     l, r = 1, max(piles)
