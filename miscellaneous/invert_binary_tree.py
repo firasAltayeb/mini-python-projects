@@ -17,8 +17,12 @@ class Solution:
         if root is None:
             return None
 
-        # Swap the left and right subtrees
-        root.left, root.right = self.invert_tree(root.right), self.invert_tree(root.left)
+        # swap the children
+        root.left, root.right = root.right, root.left
+
+        # make 2 recursive calls
+        self.invert_tree(root.left)
+        self.invert_tree(root.right)
         return root
 
 
