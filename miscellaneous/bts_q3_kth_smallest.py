@@ -2,11 +2,6 @@
 # return the kth smallest value (1-indexed) of all the values of the nodes in the tree.
 
 def kth_smallest(root, k):
-    """
-    :type root: TreeNode
-    :type k: int
-    :rtype: int
-    """
     stack = []
     cur = root
     n = 0

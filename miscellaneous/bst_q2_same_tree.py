@@ -3,11 +3,6 @@
 # Two binary trees are considered the same if they are structurally identical, and the nodes have the same value.
 
 def is_same_tree(p, q):
-    """
-    :type p: TreeNode
-    :type q: TreeNode
-    :rtype: bool
-    """
     if not p and not q:
         return True
     if not p or not q or p.val != q.val:

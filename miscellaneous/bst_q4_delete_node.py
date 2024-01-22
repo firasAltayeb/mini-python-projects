@@ -1,13 +1,6 @@
 # Given a root node reference of a BST and a key, delete the node with the given key in the BST.
 # Return the root node reference (possibly updated) of the BST.
 
-class TreeNode(object):
-    def __init__(self, val=0, left=None, right=None):
-        self.val = val
-        self.left = left
-        self.right = right
-
-
 def find_min_node(self, root):
     while root.left:
         root = root.left
