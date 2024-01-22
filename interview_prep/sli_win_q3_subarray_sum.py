@@ -1,5 +1,7 @@
-# Given a circular integer array nums of length n, return the maximum possible sum of a non-empty subarray of nums.
-# A circular array means the end of the array connects to the beginning of the array.
+# Given a circular integer array nums of length n, return the maximum possible sum
+# of a non-empty subarray of nums. A circular array means the end of the array
+# connects to the beginning of the array.
+#
 # A subarray may only include each element of the fixed buffer nums at most once.
 
 def max_subarray_sum_circular(nums):
