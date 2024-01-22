@@ -6,3 +6,13 @@ def func(p1, p2, *args, k, **kwargs):
 
 
 func(1, 2, 3, 4, 5, 9, k=6, key1=7, key2=8)
+
+
+def test_star(*args):
+    print(args)
+    for x in args:
+        print(x)
+
+
+test_star()
+test_star(0, 1, 2, 3, 4, 5)
