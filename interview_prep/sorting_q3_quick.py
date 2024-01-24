@@ -1,28 +1,26 @@
-# Given an integer array nums and an integer k, return the kth largest element in the array.
+# Given an array nums with n objects colored red, white, or blue, sort them in-place so that objects
+# of the same color are adjacent, with the colors in the order red, white, and blue.
 #
-# Note that it is the kth largest element in the sorted order, not the kth distinct element.
-#
-# Can you solve it without sorting?
+# We will use the integers 0, 1, and 2 to represent the color red, white, and blue, respectively.
 
-from typing import List
+def sort_colors(nums):
+    right = len(nums) - 1
+    pointer, left = 0, 0
 
+    def swap(i, j):
+        temp = nums[i]
+        nums[i] = nums[j]
+        nums[j] = temp
 
-def find_kth_largest(self, nums: List[int], k: int) -> int:
-    k = len(nums) - k
+    while pointer <= right:
+        if nums[pointer] == 0:
+            swap(left, pointer)
+            left += 1
+        if nums[pointer] == 2:
+            swap(right, pointer)
+            right -= 1
+            # cancels out line 23 - pointer shouldn't move
+            pointer -= 1
+        pointer += 1
 
-    def quick_select(s, e):
-        pivot, p = nums[e], s
-        for i in range(s, e):
-            if nums[i] <= pivot:
-                nums[p], nums[i] = nums[i], nums[p]
-                p += 1
-        nums[p], nums[e] = nums[e], nums[p]
-
-        if p > k:
-            return quick_select(s, p - 1)
-        elif p < k:
-            return quick_select(p + 1, e)
-        else:
-            return nums[p]
-
-    return quick_select(0, len(nums) - 1)
+    return nums
