@@ -21,7 +21,7 @@ player_score = 0
 computer_score = 0
 
 welcome_message = """
-          Welcome to 'Pig', a dice game!
+          Welcome to Firas's dice game!
 
     In this game, a user and a computer opponent
     roll a 6-sided die each round. If the value of
@@ -38,10 +38,10 @@ username = input("What is your name? ")
 # while username == '':
 #     username = input("What is your name? ")
 
+print('Hello, {}'.format(username))
+
 while True:
     input(f"Press 'Enter' to roll the dice {username}!\n")
-
-    print('Hello, {}'.format(username))
 
     player_dice_value = randint(1, 6)
     print(f"{username} rolls a {player_dice_value}")
