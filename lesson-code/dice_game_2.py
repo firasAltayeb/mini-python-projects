@@ -16,7 +16,7 @@ def display_board():
 
 
 welcome_box = """
-welcome to Lily's dice game.
+welcome to NAME dice game.
 In this game you and your friend roll a 6 sided dice each round.
 The player gets the value of the dice added to their points.
 If the player rolled a 1 all their points go to 0 >:) evil

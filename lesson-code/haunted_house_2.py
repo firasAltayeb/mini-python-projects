@@ -43,15 +43,20 @@ while exit_choice.casefold() != correct_exit:
             attempt_counter = 0
 
     exit_choice = input("Please choose an exit: ")
-    # Code below changes the exit everytime to increase difficulty
-    # random_index = random.randrange(len(all_exits))
-    # correct_exit = all_exits[random_index]
+    random_index = random.randrange(len(all_exits))
+    correct_exit = all_exits[random_index]
     if exit_choice.casefold() == correct_exit:
         print("You have escaped")
-    if exit_choice.casefold() == "quit":
+    elif exit_choice.casefold() != correct_exit:
+        if attempt_counter == 6:
+            print("The ghost has made you disappear")
+            break
+        else:
+            print("Ohh no, that choice was incorrect")
+    elif exit_choice.casefold() == "quit":
         print("Game Over")
         break
-
+  
     attempt_counter += 1
 
 # else:

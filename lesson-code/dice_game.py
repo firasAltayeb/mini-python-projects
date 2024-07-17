@@ -21,8 +21,8 @@ player_score = 0
 computer_score = 0
 
 welcome_message = """
-          Welcome to Firas's dice game!
-
+          Welcome to dice game!
+        
     In this game, a user and a computer opponent
     roll a 6-sided die each round. If the value of
     the die is a 1, the player that rolled the 1 loses
